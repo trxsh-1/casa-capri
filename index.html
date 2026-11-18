@@ -105,20 +105,50 @@
       text-decoration: none;
     }
 
-    /* CAMBIAR LOGO: tamaño del logotipo en el encabezado */
-    .marca img {
-      display: block;
-      width: 52px;
-      height: 52px;
-      object-fit: contain;
-      border-radius: 10px;
+    .marca-sello {
+      position: relative;
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 64px;
+      aspect-ratio: 1;
+      border: 1.5px solid var(--crema);
+      border-radius: 50%;
+      color: var(--crema);
+    }
+
+    .marca-sello::before {
+      position: absolute;
+      inset: 4px;
+      border: 1px solid var(--crema);
+      border-radius: inherit;
+      content: "";
+    }
+
+    .marca-sello span {
+      font-family: var(--fuente-titulo);
+      font-size: 1.65rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .marca-texto {
+      display: grid;
+      gap: 0.3rem;
     }
 
     .marca-nombre {
       font-family: var(--fuente-titulo);
       font-weight: 700;
-      font-size: 1.45rem;
+      font-size: 1.55rem;
       line-height: 1;
+    }
+
+    .marca-lema {
+      font-size: 0.68rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-transform: uppercase;
     }
 
     .navegacion ul {
@@ -246,25 +276,105 @@
     }
 
     /* ---------- Menú ---------- */
+    #menu {
+      background:
+        radial-gradient(ellipse at 92% 4%, rgba(221, 211, 199, 0.42), transparent 34rem),
+        var(--crema);
+    }
+
+    .menu-encabezado {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .menu-encabezado .seccion-intro { margin-bottom: 0; }
+
+    .menu-controles {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.6fr);
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--borde);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .busqueda-menu {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .busqueda-menu svg {
+      position: absolute;
+      left: 0.9rem;
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: var(--cafe-medio);
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    .busqueda-menu input {
+      width: 100%;
+      min-height: 46px;
+      padding: 0.65rem 0.9rem 0.65rem 2.7rem;
+      border: 1px solid var(--borde);
+      border-radius: 6px;
+      background: var(--tarjeta);
+      color: var(--cafe-texto);
+      font: inherit;
+    }
+
+    .busqueda-menu input:focus-visible,
+    .categoria-filtro:focus-visible {
+      outline: 3px solid var(--taupe);
+      outline-offset: 3px;
+    }
+
     .categorias-nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.25rem;
+      scrollbar-width: thin;
     }
 
-    .categorias-nav a {
-      padding: 0.45rem 1.05rem;
-      border: 1.5px solid var(--taupe);
-      border-radius: 999px;
+    .categoria-filtro {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 0.55rem 0.95rem;
+      border: 1px solid var(--borde);
+      border-radius: 5px;
+      background: transparent;
       color: var(--cafe-texto);
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
+      font: 600 0.92rem var(--fuente-texto);
+      cursor: pointer;
+      transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
     }
 
-    .categorias-nav a:hover { background: var(--taupe-claro); }
+    .categoria-filtro:hover { border-color: var(--cafe-medio); }
+
+    .categoria-filtro[aria-pressed="true"] {
+      border-color: var(--cafe);
+      background: var(--cafe);
+      color: var(--crema);
+    }
+
+    .menu-estado {
+      min-height: 1.5rem;
+      margin: 0.75rem 0 0;
+      color: var(--cafe-medio);
+      font-size: 0.9rem;
+    }
 
     .categoria { margin-top: 3.5rem; }
+
+    .categoria[hidden] { display: none; }
 
     .categoria-titulo {
       display: flex;
@@ -275,6 +385,17 @@
       font-weight: 700;
       font-size: 1.75rem;
     }
+
+    .categoria-titulo::before {
+      color: var(--cafe-medio);
+      font: 700 0.78rem var(--fuente-texto);
+      letter-spacing: 0;
+    }
+
+    #para-empezar .categoria-titulo::before { content: "01"; }
+    #pastas .categoria-titulo::before { content: "02"; }
+    #pizzas .categoria-titulo::before { content: "03"; }
+    #dulce-final .categoria-titulo::before { content: "04"; }
 
     .categoria-titulo::after {
       content: "";
@@ -291,12 +412,39 @@
 
     .tarjeta {
       display: flex;
-      align-items: flex-start;
-      gap: 1.1rem;
-      padding: 1.4rem;
+      flex-direction: column;
+      overflow: hidden;
       background: var(--tarjeta);
       border: 1px solid var(--borde);
-      border-radius: 22px;
+      border-radius: 8px;
+      box-shadow: 0 5px 16px rgba(47, 39, 31, 0.035);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .tarjeta:hover {
+      transform: translateY(-3px);
+      border-color: var(--taupe);
+      box-shadow: 0 12px 26px rgba(47, 39, 31, 0.09);
+    }
+
+    .foto-plato {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: var(--taupe-claro);
+      transition: transform 300ms ease;
+    }
+
+    .tarjeta:hover .foto-plato { transform: scale(1.035); }
+
+    .tarjeta-contenido {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      padding: 1.25rem;
     }
 
     /* Icono dentro de un doble aro, como el logotipo */
@@ -353,6 +501,46 @@
       color: var(--cafe-medio);
     }
 
+    .pedido-plato {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 44px;
+      margin-top: 1rem;
+      padding: 0.65rem 1rem;
+      border: 1px solid #236f50;
+      border-radius: 5px;
+      background: #236f50;
+      color: #fff;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      transition: background 160ms ease, border-color 160ms ease;
+    }
+
+    .pedido-plato:hover {
+      border-color: #18563c;
+      background: #18563c;
+    }
+
+    .pedido-plato:focus-visible {
+      outline: 3px solid var(--taupe);
+      outline-offset: 3px;
+    }
+
+    .pedido-plato svg {
+      flex: none;
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .insignia {
       display: inline-block;
       margin-top: 0.35rem;
@@ -368,6 +556,16 @@
       font-size: 0.92rem;
       color: var(--cafe-medio);
     }
+
+    .sin-resultados {
+      margin: 1.5rem 0 0;
+      padding: 2rem 1.25rem;
+      border: 1px dashed var(--taupe);
+      color: var(--cafe-medio);
+      text-align: center;
+    }
+
+    .sin-resultados[hidden] { display: none; }
 
     /* ---------- Especialidades de la casa ---------- */
     .especialidades {
@@ -475,20 +673,34 @@
     /* ---------- Teléfonos y tabletas ---------- */
     @media (max-width: 700px) {
       .hero-aros { right: -30%; width: 110vw; opacity: 0.5; }
-      .tarjeta { padding: 1.15rem; }
       .destacado { padding: 1.5rem; }
+      .menu-encabezado { display: block; }
+      .menu-controles { grid-template-columns: 1fr; gap: 0.7rem; }
+      .categorias-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        overflow: visible;
+        margin-inline: -0.25rem;
+      }
     }
 
     @media (max-width: 480px) {
-      .marca-nombre { font-size: 1.25rem; }
+      .marca { gap: 0.65rem; }
+      .marca-sello { width: 56px; }
+      .marca-nombre { font-size: 1.3rem; }
+      .marca-lema { font-size: 0.59rem; }
       .navegacion ul { gap: 0.25rem 1.1rem; }
       .navegacion a { font-size: 0.95rem; }
+      .tarjeta-contenido { padding: 1rem; }
+      .tarjeta-cabecera { align-items: flex-start; flex-wrap: wrap; gap: 0.25rem 0.6rem; }
+      .tarjeta-nombre, .precio { font-size: 1.15rem; }
     }
 
     /* Respeta a quienes prefieren menos movimiento */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .aro { animation: none; }
+      .tarjeta, .categoria-filtro, .foto-plato { transition: none; }
     }
   </style>
 </head>
@@ -524,11 +736,11 @@
     <div class="contenedor cabecera-fila">
 
       <a class="marca" href="#inicio" aria-label="Casa Capri, ir al inicio">
-        <!-- CAMBIAR LOGO: sube tu archivo con el nombre logo.png en la misma carpeta que index.html.
-             Si tu archivo tiene otro nombre, cámbialo aquí en src="..." -->
-        <img src="logo.png" alt="Logotipo de Casa Capri" width="52" height="52">
-        <!-- CAMBIAR NOMBRE: nombre del restaurante en el encabezado -->
-        <span class="marca-nombre">Casa Capri</span>
+        <span class="marca-sello" aria-hidden="true"><span>CC</span></span>
+        <span class="marca-texto">
+          <span class="marca-nombre">Casa Capri</span>
+          <span class="marca-lema">Cucina italiana moderna</span>
+        </span>
       </a>
 
       <nav class="navegacion" aria-label="Navegación principal">
@@ -580,16 +792,28 @@
     <section class="seccion" id="menu">
       <div class="contenedor">
 
-        <h2 class="seccion-titulo">Nuestro menú</h2>
-        <p class="seccion-intro">Platos para compartir, pastas, pizzas artesanales y postres. Elige por categoría.</p>
+        <div class="menu-encabezado">
+          <div>
+            <h2 class="seccion-titulo">Nuestro menú</h2>
+            <p class="seccion-intro">Platos para compartir, pastas, pizzas artesanales y postres.</p>
+          </div>
+        </div>
 
-        <!-- Accesos rápidos a cada categoría -->
-        <nav class="categorias-nav" aria-label="Categorías del menú">
-          <a href="#para-empezar">Para empezar</a>
-          <a href="#pastas">Pastas</a>
-          <a href="#pizzas">Pizzas artesanales</a>
-          <a href="#dulce-final">Dulce final</a>
-        </nav>
+        <div class="menu-controles">
+          <label class="busqueda-menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
+            <input id="buscar-plato" type="search" placeholder="Buscar un plato o ingrediente" autocomplete="off" aria-label="Buscar platos e ingredientes">
+          </label>
+          <nav class="categorias-nav" aria-label="Filtrar por categoría">
+            <button class="categoria-filtro" type="button" data-categoria="todas" aria-pressed="true">Todos</button>
+            <button class="categoria-filtro" type="button" data-categoria="para-empezar" aria-pressed="false">Para empezar</button>
+            <button class="categoria-filtro" type="button" data-categoria="pastas" aria-pressed="false">Pastas</button>
+            <button class="categoria-filtro" type="button" data-categoria="pizzas" aria-pressed="false">Pizzas</button>
+            <button class="categoria-filtro" type="button" data-categoria="dulce-final" aria-pressed="false">Postres</button>
+          </nav>
+        </div>
+        <p class="menu-estado" id="estado-menu" role="status" aria-live="polite"></p>
+        <p class="sin-resultados" id="sin-resultados" hidden>No encontramos platos con esa búsqueda. Prueba con otro nombre o ingrediente.</p>
 
 
         <!-- ============ CATEGORÍA: PARA EMPEZAR ============
@@ -601,26 +825,28 @@
           <div class="tarjetas">
 
             <article class="tarjeta">
-              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pan"/></svg></div>
-              <div>
+              <img class="foto-plato" src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Focaccia italiana recién horneada con hierbas" loading="lazy" decoding="async">
+              <div class="tarjeta-contenido">
                 <div class="tarjeta-cabecera">
                   <h4 class="tarjeta-nombre">Focaccia Capri</h4>
                   <span class="precio">$5.50</span>
                 </div>
                 <p class="tarjeta-desc">Focaccia tibia con aceite de oliva y romero, acompañada de salsa de tomate casera para compartir.</p>
                 <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> harina, aceite de oliva, romero, sal marina, tomate.</p>
+                <a class="pedido-plato" href="https://wa.me/593900000000" target="_blank" rel="noopener" aria-label="Pedir Focaccia Capri por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.4.6-.4.9-.1l1 1.4c.2.3.1.5-.2.8l-.5.5c.6 1.2 1.4 2 2.6 2.6l.5-.5c.3-.3.5-.4.8-.2l1.4 1c.3.2.3.6.1.9-.4.6-1.1 1-1.8 1-2.8-.2-6.2-3.6-6.4-6.4 0-.7.4-1.4 1-1.8Z"/></svg>Pedir por WhatsApp</a>
               </div>
             </article>
 
             <article class="tarjeta">
-              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pan"/></svg></div>
-              <div>
+              <img class="foto-plato" src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Pan tostado italiano con tomate y hierbas frescas" loading="lazy" decoding="async">
+              <div class="tarjeta-contenido">
                 <div class="tarjeta-cabecera">
                   <h4 class="tarjeta-nombre">Tostadas Giardino</h4>
                   <span class="precio">$6.00</span>
                 </div>
                 <p class="tarjeta-desc">Pan rústico crujiente con tomate fresco, albahaca y un toque de ajo. Ligeras y perfectas para abrir la mesa.</p>
                 <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> pan rústico, tomate, albahaca, ajo, aceite de oliva.</p>
+                <a class="pedido-plato" href="https://wa.me/593900000000" target="_blank" rel="noopener" aria-label="Pedir Tostadas Giardino por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.4.6-.4.9-.1l1 1.4c.2.3.1.5-.2.8l-.5.5c.6 1.2 1.4 2 2.6 2.6l.5-.5c.3-.3.5-.4.8-.2l1.4 1c.3.2.3.6.1.9-.4.6-1.1 1-1.8 1-2.8-.2-6.2-3.6-6.4-6.4 0-.7.4-1.4 1-1.8Z"/></svg>Pedir por WhatsApp</a>
               </div>
             </article>
 
@@ -634,33 +860,35 @@
           <div class="tarjetas">
 
             <article class="tarjeta">
-              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pasta"/></svg></div>
-              <div>
+              <img class="foto-plato" src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Plato de pasta italiana con salsa de tomate y albahaca" loading="lazy" decoding="async">
+              <div class="tarjeta-contenido">
                 <div class="tarjeta-cabecera">
                   <h4 class="tarjeta-nombre">Rosso Semplice</h4>
                   <span class="precio">$9.50</span>
                 </div>
                 <p class="tarjeta-desc">Spaghetti en salsa de tomate cocida lentamente con albahaca. Sencillo, suave y pensado para todas las edades.</p>
                 <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> spaghetti, tomate, albahaca, cebolla, aceite de oliva, queso parmesano.</p>
+                <a class="pedido-plato" href="https://wa.me/593900000000" target="_blank" rel="noopener" aria-label="Pedir Rosso Semplice por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.4.6-.4.9-.1l1 1.4c.2.3.1.5-.2.8l-.5.5c.6 1.2 1.4 2 2.6 2.6l.5-.5c.3-.3.5-.4.8-.2l1.4 1c.3.2.3.6.1.9-.4.6-1.1 1-1.8 1-2.8-.2-6.2-3.6-6.4-6.4 0-.7.4-1.4 1-1.8Z"/></svg>Pedir por WhatsApp</a>
               </div>
             </article>
 
             <article class="tarjeta">
-              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pasta"/></svg></div>
-              <div>
+              <img class="foto-plato" src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Fettuccine cremoso con champiñones y perejil" loading="lazy" decoding="async">
+              <div class="tarjeta-contenido">
                 <div class="tarjeta-cabecera">
                   <h4 class="tarjeta-nombre">Fettuccine Bosco</h4>
                   <span class="precio">$11.50</span>
                 </div>
                 <p class="tarjeta-desc">Fettuccine con champiñones salteados en una salsa cremosa de parmesano y un toque de perejil.</p>
                 <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> fettuccine, champiñones, crema de leche, parmesano, ajo, perejil.</p>
+                <a class="pedido-plato" href="https://wa.me/593900000000" target="_blank" rel="noopener" aria-label="Pedir Fettuccine Bosco por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.4.6-.4.9-.1l1 1.4c.2.3.1.5-.2.8l-.5.5c.6 1.2 1.4 2 2.6 2.6l.5-.5c.3-.3.5-.4.8-.2l1.4 1c.3.2.3.6.1.9-.4.6-1.1 1-1.8 1-2.8-.2-6.2-3.6-6.4-6.4 0-.7.4-1.4 1-1.8Z"/></svg>Pedir por WhatsApp</a>
               </div>
             </article>
 
             <!-- Especialidad de la casa (la insignia se muestra con <span class="insignia">) -->
             <article class="tarjeta">
-              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pasta"/></svg></div>
-              <div>
+              <img class="foto-plato" src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Porción de lasaña gratinada con salsa de tomate" loading="lazy" decoding="async">
+              <div class="tarjeta-contenido">
                 <div class="tarjeta-cabecera">
                   <h4 class="tarjeta-nombre">Lasagna Capri</h4>
                   <span class="precio">$12.50</span>
@@ -668,6 +896,7 @@
                 <span class="insignia">Especialidad de la casa</span>
                 <p class="tarjeta-desc">Capas de pasta, salsa de carne y bechamel, gratinadas con mozzarella. Una porción generosa para compartir.</p>
                 <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> pasta de lasaña, carne molida, salsa de tomate, bechamel, mozzarella.</p>
+                <a class="pedido-plato" href="https://wa.me/593900000000" target="_blank" rel="noopener" aria-label="Pedir Lasagna Capri por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.4.6-.4.9-.1l1 1.4c.2.3.1.5-.2.8l-.5.5c.6 1.2 1.4 2 2.6 2.6l.5-.5c.3-.3.5-.4.8-.2l1.4 1c.3.2.3.6.1.9-.4.6-1.1 1-1.8 1-2.8-.2-6.2-3.6-6.4-6.4 0-.7.4-1.4 1-1.8Z"/></svg>Pedir por WhatsApp</a>
               </div>
             </article>
 
@@ -681,26 +910,28 @@
           <div class="tarjetas">
 
             <article class="tarjeta">
-              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pizza"/></svg></div>
-              <div>
+              <img class="foto-plato" src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Pizza artesanal con mozzarella, tomate y albahaca" loading="lazy" decoding="async">
+              <div class="tarjeta-contenido">
                 <div class="tarjeta-cabecera">
                   <h4 class="tarjeta-nombre">Pizza Capri</h4>
                   <span class="precio">$10.50</span>
                 </div>
                 <p class="tarjeta-desc">Masa fina con salsa de tomate, mozzarella y albahaca fresca. La clásica combinación caprese, sin complicaciones.</p>
                 <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> masa de pizza, tomate, mozzarella, albahaca, aceite de oliva.</p>
+                <a class="pedido-plato" href="https://wa.me/593900000000" target="_blank" rel="noopener" aria-label="Pedir Pizza Capri por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.4.6-.4.9-.1l1 1.4c.2.3.1.5-.2.8l-.5.5c.6 1.2 1.4 2 2.6 2.6l.5-.5c.3-.3.5-.4.8-.2l1.4 1c.3.2.3.6.1.9-.4.6-1.1 1-1.8 1-2.8-.2-6.2-3.6-6.4-6.4 0-.7.4-1.4 1-1.8Z"/></svg>Pedir por WhatsApp</a>
               </div>
             </article>
 
             <article class="tarjeta">
-              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pizza"/></svg></div>
-              <div>
+              <img class="foto-plato" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Pizza horneada con queso fundido y champiñones" loading="lazy" decoding="async">
+              <div class="tarjeta-contenido">
                 <div class="tarjeta-cabecera">
                   <h4 class="tarjeta-nombre">Pizza Gran Casa</h4>
                   <span class="precio">$12.50</span>
                 </div>
                 <p class="tarjeta-desc">Jamón y champiñones sobre mozzarella derretida, con un toque de orégano. Una favorita para la mesa familiar.</p>
                 <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> masa de pizza, salsa de tomate, mozzarella, jamón, champiñones, orégano.</p>
+                <a class="pedido-plato" href="https://wa.me/593900000000" target="_blank" rel="noopener" aria-label="Pedir Pizza Gran Casa por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.4.6-.4.9-.1l1 1.4c.2.3.1.5-.2.8l-.5.5c.6 1.2 1.4 2 2.6 2.6l.5-.5c.3-.3.5-.4.8-.2l1.4 1c.3.2.3.6.1.9-.4.6-1.1 1-1.8 1-2.8-.2-6.2-3.6-6.4-6.4 0-.7.4-1.4 1-1.8Z"/></svg>Pedir por WhatsApp</a>
               </div>
             </article>
 
@@ -714,21 +945,22 @@
           <div class="tarjetas">
 
             <article class="tarjeta">
-              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-postre"/></svg></div>
-              <div>
+              <img class="foto-plato" src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Tiramisù italiano espolvoreado con cacao" loading="lazy" decoding="async">
+              <div class="tarjeta-contenido">
                 <div class="tarjeta-cabecera">
                   <h4 class="tarjeta-nombre">Tiramisù Casa Capri</h4>
                   <span class="precio">$5.50</span>
                 </div>
                 <p class="tarjeta-desc">Bizcochos suaves con café y crema de mascarpone, terminado con cacao. Cremoso y fácil de compartir.</p>
                 <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> bizcochos, café, mascarpone, huevo, azúcar, cacao.</p>
+                <a class="pedido-plato" href="https://wa.me/593900000000" target="_blank" rel="noopener" aria-label="Pedir Tiramisù Casa Capri por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.4.6-.4.9-.1l1 1.4c.2.3.1.5-.2.8l-.5.5c.6 1.2 1.4 2 2.6 2.6l.5-.5c.3-.3.5-.4.8-.2l1.4 1c.3.2.3.6.1.9-.4.6-1.1 1-1.8 1-2.8-.2-6.2-3.6-6.4-6.4 0-.7.4-1.4 1-1.8Z"/></svg>Pedir por WhatsApp</a>
               </div>
             </article>
 
             <!-- Especialidad de la casa -->
             <article class="tarjeta">
-              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-postre"/></svg></div>
-              <div>
+              <img class="foto-plato" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Postre italiano frío decorado con fruta fresca" loading="lazy" decoding="async">
+              <div class="tarjeta-contenido">
                 <div class="tarjeta-cabecera">
                   <h4 class="tarjeta-nombre">Panna Cotta de Maracuyá</h4>
                   <span class="precio">$5.00</span>
@@ -736,6 +968,7 @@
                 <span class="insignia">Especialidad de la casa</span>
                 <p class="tarjeta-desc">Crema suave de textura delicada, coronada con salsa de maracuyá. Un toque local en un clásico italiano.</p>
                 <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> crema de leche, azúcar, gelatina, maracuyá.</p>
+                <a class="pedido-plato" href="https://wa.me/593900000000" target="_blank" rel="noopener" aria-label="Pedir Panna Cotta de Maracuyá por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.4.6-.4.9-.1l1 1.4c.2.3.1.5-.2.8l-.5.5c.6 1.2 1.4 2 2.6 2.6l.5-.5c.3-.3.5-.4.8-.2l1.4 1c.3.2.3.6.1.9-.4.6-1.1 1-1.8 1-2.8-.2-6.2-3.6-6.4-6.4 0-.7.4-1.4 1-1.8Z"/></svg>Pedir por WhatsApp</a>
               </div>
             </article>
 
@@ -743,7 +976,7 @@
         </div>
 
         <!-- Nota sobre precios -->
-        <p class="nota-menu">
+        <p class="nota-menu" id="nota-menu">
           Precios referenciales en dólares estadounidenses (USD). Si tienes alguna alergia o restricción alimentaria, avísanos al hacer tu pedido.
         </p>
 
@@ -812,9 +1045,9 @@
         <!-- Llamada a la acción -->
         <div class="pedido">
           <p class="pedido-frase">Haz tu pedido hoy y comparte la mesa con Casa Capri.</p>
-          <!-- CAMBIAR DATOS: reemplaza el número de ejemplo por el de WhatsApp.
-               Formato: código de país 593 + número sin el 0 inicial (ej.: 593991234567) -->
-          <a class="boton" href="https://wa.me/593900000000" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+          <!-- CAMBIAR DATOS: configura numeroWhatsApp al final del archivo.
+            Formato: código de país 593 + número sin el 0 inicial (ej.: 593991234567) -->
+          <a class="boton" id="pedido-whatsapp" href="https://wa.me/593900000000" target="_blank" rel="noopener">Pedir por WhatsApp</a>
         </div>
 
       </div>
@@ -834,5 +1067,70 @@
     </div>
   </footer>
 
+  <script>
+    const numeroWhatsApp = "593900000000";
+    const buscadorMenu = document.querySelector("#buscar-plato");
+    const filtrosCategoria = [...document.querySelectorAll(".categoria-filtro")];
+    const categoriasMenu = [...document.querySelectorAll(".categoria")];
+    const estadoMenu = document.querySelector("#estado-menu");
+    const mensajeSinResultados = document.querySelector("#sin-resultados");
+    const notaMenu = document.querySelector("#nota-menu");
+    let categoriaActiva = "todas";
+
+    document.querySelectorAll(".pedido-plato").forEach((enlace) => {
+      const tarjeta = enlace.closest(".tarjeta");
+      const nombre = tarjeta.querySelector(".tarjeta-nombre").textContent.trim();
+      const precio = tarjeta.querySelector(".precio").textContent.trim();
+      const mensaje = `Hola, quiero pedir ${nombre} (${precio}).`;
+      enlace.href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+    });
+
+    const mensajePedidoGeneral = "Hola, quiero hacer un pedido en Casa Capri.";
+    document.querySelector("#pedido-whatsapp").href =
+      `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajePedidoGeneral)}`;
+
+    function actualizarMenu() {
+      const termino = buscadorMenu.value.trim().toLocaleLowerCase("es");
+      let platosVisibles = 0;
+
+      categoriasMenu.forEach((categoria) => {
+        const coincideCategoria = categoriaActiva === "todas" || categoria.id === categoriaActiva;
+        const tarjetas = [...categoria.querySelectorAll(".tarjeta")];
+        let platosCategoria = 0;
+
+        tarjetas.forEach((tarjeta) => {
+          const textoPlato = [...tarjeta.querySelectorAll(".tarjeta-nombre, .tarjeta-desc, .tarjeta-ingredientes, .insignia")]
+            .map((elemento) => elemento.textContent)
+            .join(" ")
+            .toLocaleLowerCase("es");
+          const coincideTexto = !termino || textoPlato.includes(termino);
+          tarjeta.hidden = !coincideCategoria || !coincideTexto;
+          if (!tarjeta.hidden) platosCategoria += 1;
+        });
+
+        categoria.hidden = !coincideCategoria || platosCategoria === 0;
+        platosVisibles += platosCategoria;
+      });
+
+      estadoMenu.textContent = termino
+        ? `${platosVisibles} ${platosVisibles === 1 ? "plato encontrado" : "platos encontrados"}`
+        : `${platosVisibles} platos en el menú`;
+      mensajeSinResultados.hidden = platosVisibles !== 0;
+      notaMenu.hidden = platosVisibles === 0;
+    }
+
+    filtrosCategoria.forEach((filtro) => {
+      filtro.addEventListener("click", () => {
+        categoriaActiva = filtro.dataset.categoria;
+        filtrosCategoria.forEach((opcion) => {
+          opcion.setAttribute("aria-pressed", String(opcion === filtro));
+        });
+        actualizarMenu();
+      });
+    });
+
+    buscadorMenu.addEventListener("input", actualizarMenu);
+    actualizarMenu();
+  </script>
 </body>
 </html>

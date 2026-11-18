@@ -2,612 +2,837 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#b8aa98">
-  <meta name="description" content="Casa Capri: cocina italiana moderna en Manta. Pastas, pizzas artesanales y postres para compartir.">
-  <title>Casa Capri | Cucina Italiana Moderna</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ============================================================
+       GUÍA RÁPIDA PARA MODIFICAR ESTE ARCHIVO
+       Usa Ctrl + F (Buscar) y escribe estas palabras clave:
+
+       CAMBIAR NOMBRE   → nombre del restaurante
+       CAMBIAR COLORES  → colores de la marca
+       CAMBIAR LOGO     → logotipo (logo.png)
+       NUEVO PRODUCTO   → cómo agregar productos
+       CAMBIAR PRECIO   → dónde están los precios
+       CAMBIAR DATOS    → dirección, horario y WhatsApp
+       ============================================================ -->
+
+  <!-- CAMBIAR NOMBRE: el título que aparece en la pestaña del navegador -->
+  <title>Casa Capri | Menú digital, cocina italiana moderna en Manta</title>
+  <meta name="description" content="Menú digital de Casa Capri: cocina italiana moderna en Manta, Ecuador. Entradas, pastas, pizzas artesanales y postres para compartir en familia.">
+  <meta name="theme-color" content="#BAAB9A">
+
+  <!-- CAMBIAR LOGO: el icono de la pestaña también usa logo.png -->
+  <link rel="icon" href="logo.png">
+
+  <!-- Tipografías de Google Fonts (opcional). Si no cargan, el sitio usa Georgia y la fuente del sistema. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* =========================================================
-       CASA CAPRI — MENÚ DIGITAL
-       Para personalizar: cambia los valores de colores aquí abajo.
-       ========================================================= */
+    /* ============================================================
+       CAMBIAR COLORES
+       Todos los colores del sitio están aquí. Cambia el código
+       (#XXXXXX) y se actualizará toda la página.
+       ============================================================ */
     :root {
-      --stone: #b8aa98;       /* Beige piedra */
-      --ivory: #fff2d9;       /* Marfil */
-      --taupe: #817566;       /* Topo */
-      --ink: #39332d;
-      --muted: #756b60;
-      --paper: #f8f3ea;
-      --line: rgba(91, 78, 65, .18);
-      --shadow: 0 18px 50px rgba(57, 47, 37, .09);
-      --serif: Georgia, "Times New Roman", serif;
-      --sans: Arial, Helvetica, sans-serif;
-      --radius: 22px;
+      --taupe:        #BAAB9A;  /* color de fondo del logo */
+      --taupe-claro:  #DDD3C7;  /* versión suave del taupe */
+      --crema:        #FDF5E8;  /* color crema del logo */
+      --tarjeta:      #FFFCF7;  /* fondo de las tarjetas de productos */
+      --borde:        #E6DBCC;  /* líneas finas de las tarjetas */
+      --cafe:         #4B4036;  /* café oscuro: bloques destacados y botones */
+      --cafe-texto:   #2F271F;  /* color del texto principal */
+      --cafe-medio:   #6B5D4F;  /* texto secundario */
+
+      --fuente-titulo: "Fraunces", Georgia, "Times New Roman", serif;
+      --fuente-texto:  "Nunito Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
     }
 
+    /* ---------- Base ---------- */
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      color: var(--ink);
-      background: var(--paper);
-      font-family: var(--sans);
+      font-family: var(--fuente-texto);
+      font-size: 1.0625rem;
       line-height: 1.6;
+      color: var(--cafe-texto);
+      background: var(--crema);
     }
-    a { color: inherit; text-decoration: none; }
+
     img { max-width: 100%; }
 
-    .site-header {
+    .contenedor {
+      width: min(1120px, 100% - 2.5rem);
+      margin-inline: auto;
+    }
+
+    /* Las secciones dejan espacio arriba para no quedar tapadas por el encabezado fijo */
+    section[id] { scroll-margin-top: 76px; }
+
+    a:focus-visible,
+    .boton:focus-visible {
+      outline: 3px solid currentColor;
+      outline-offset: 4px;
+    }
+
+    /* ---------- Encabezado ---------- */
+    .cabecera {
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(248, 243, 234, .94);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
+      background: var(--taupe);
+      border-bottom: 1px solid rgba(47, 39, 31, 0.15);
     }
-    .header-inner {
-      width: min(1160px, calc(100% - 40px));
-      min-height: 78px;
-      margin: auto;
+
+    .cabecera-fila {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      padding: 0.6rem 0;
     }
-    .brand {
+
+    .marca {
       display: flex;
       align-items: center;
-      gap: 12px;
-      min-width: 0;
+      gap: 0.75rem;
+      color: var(--cafe-texto);
+      text-decoration: none;
     }
-    /* Reemplaza el archivo logo.png por tu logotipo; conserva este nombre. */
-    .brand-logo {
+
+    /* CAMBIAR LOGO: tamaño del logotipo en el encabezado */
+    .marca img {
+      display: block;
       width: 52px;
       height: 52px;
       object-fit: contain;
-      border-radius: 50%;
-    }
-    .brand-name {
-      display: block;
-      font-family: var(--serif);
-      font-size: 1.25rem;
-      letter-spacing: .12em;
-      line-height: 1.1;
-    }
-    .brand-subtitle {
-      display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: .58rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-    }
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 27px;
-      color: #5f554b;
-      font-size: .78rem;
-      letter-spacing: .06em;
-    }
-    .nav a { transition: color .2s ease; }
-    .nav a:hover { color: var(--taupe); }
-    .nav .nav-cta {
-      padding: 11px 18px;
-      color: var(--ivory);
-      background: var(--taupe);
-      border-radius: 999px;
+      border-radius: 10px;
     }
 
+    .marca-nombre {
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    .navegacion ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .navegacion a {
+      display: inline-block;
+      padding: 0.35rem 0;
+      color: var(--cafe-texto);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+    }
+
+    .navegacion a:hover { border-bottom-color: currentColor; }
+
+    /* ---------- Bienvenida ---------- */
     .hero {
       position: relative;
       overflow: hidden;
-      min-height: 560px;
-      display: grid;
-      place-items: center;
-      padding: 90px 20px 100px;
-      text-align: center;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(255,242,217,.72), transparent 55%),
-        linear-gradient(135deg, #c4b7a6, #a99b89);
+      background: var(--taupe);
+      padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(4rem, 10vw, 8rem);
     }
-    .hero::before, .hero::after {
-      content: "";
+
+    .hero-texto {
+      position: relative;
+      max-width: 34rem;
+    }
+
+    .hero h1 {
+      margin: 0 0 1.25rem;
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-descripcion {
+      max-width: 32rem;
+      margin: 0 0 2rem;
+      font-size: 1.15rem;
+    }
+
+    .hero-acciones {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.5rem;
+    }
+
+    .boton {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      border-radius: 999px;
+      background: var(--cafe);
+      color: var(--crema);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .boton:hover { background: var(--cafe-texto); }
+
+    .enlace-suave {
+      color: inherit;
+      font-weight: 600;
+      text-underline-offset: 4px;
+    }
+
+    /* Aros dibujados a mano, inspirados en el logotipo */
+    .hero-aros {
       position: absolute;
-      width: 390px;
-      height: 390px;
-      border: 1px solid rgba(255,242,217,.32);
-      border-radius: 50%;
+      top: 50%;
+      right: -8%;
+      width: min(620px, 80vw);
+      height: auto;
+      transform: translateY(-50%);
+      color: var(--crema);
+      opacity: 0.85;
       pointer-events: none;
     }
-    .hero::before { top: -245px; left: -140px; }
-    .hero::after { right: -210px; bottom: -280px; width: 520px; height: 520px; }
-    .hero-content { position: relative; z-index: 1; max-width: 760px; }
-    .eyebrow {
-      margin: 0 0 18px;
-      color: #fff2d9;
-      font-size: .7rem;
-      letter-spacing: .28em;
-      text-transform: uppercase;
+
+    .aro {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 0;
+      animation: trazar 2.4s ease-out both;
     }
-    .hero h1 {
-      margin: 0;
-      color: #fff5e4;
-      font-family: var(--serif);
-      font-size: clamp(3.7rem, 10vw, 7.5rem);
-      font-weight: 400;
-      letter-spacing: .035em;
-      line-height: .98;
+
+    .aro-2 { animation-delay: 0.35s; }
+
+    @keyframes trazar {
+      from { stroke-dashoffset: 1; }
+      to   { stroke-dashoffset: 0; }
     }
-    .hero h1 span {
-      display: block;
-      margin-bottom: 13px;
-      font-family: cursive;
-      font-size: clamp(1.7rem, 4vw, 2.6rem);
-      font-style: italic;
-      letter-spacing: .02em;
+
+    /* ---------- Secciones generales ---------- */
+    .seccion {
+      padding: clamp(3.5rem, 8vw, 6rem) 0;
     }
-    .hero-copy {
-      max-width: 530px;
-      margin: 25px auto 30px;
-      color: rgba(255, 248, 235, .94);
-      font-family: var(--serif);
-      font-size: clamp(1.05rem, 2vw, 1.3rem);
+
+    .seccion-titulo {
+      margin: 0 0 0.5rem;
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      line-height: 1.1;
     }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 49px;
-      padding: 0 25px;
-      border: 1px solid transparent;
+
+    .seccion-intro {
+      max-width: 36rem;
+      margin: 0 0 2rem;
+      color: var(--cafe-medio);
+    }
+
+    /* ---------- Menú ---------- */
+    .categorias-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .categorias-nav a {
+      padding: 0.45rem 1.05rem;
+      border: 1.5px solid var(--taupe);
       border-radius: 999px;
-      background: var(--ivory);
-      color: var(--ink);
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .button:hover { transform: translateY(-2px); box-shadow: 0 9px 24px rgba(40,30,20,.15); }
-
-    .intro {
-      width: min(760px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 88px 0 65px;
-      text-align: center;
-    }
-    .section-kicker {
-      margin: 0 0 12px;
-      color: var(--taupe);
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-    }
-    .intro h2, .section-heading h2, .about h2 {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 400;
-      line-height: 1.12;
-    }
-    .intro p {
-      max-width: 650px;
-      margin: 19px auto 0;
-      color: var(--muted);
-      font-size: .96rem;
+      color: var(--cafe-texto);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
     }
 
-    .menu-section {
-      padding: 62px 20px 78px;
-      background: #f0e9de;
-    }
-    .menu-wrap { width: min(1080px, 100%); margin: auto; }
-    .section-heading { margin-bottom: 34px; text-align: center; }
-    .section-heading p:last-child { margin: 12px 0 0; color: var(--muted); }
-    .category { margin-top: 48px; }
-    .category:first-of-type { margin-top: 0; }
-    .category-title {
+    .categorias-nav a:hover { background: var(--taupe-claro); }
+
+    .categoria { margin-top: 3.5rem; }
+
+    .categoria-titulo {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    .category-title h3 {
-      margin: 0;
-      color: var(--taupe);
-      font-family: var(--serif);
-      font-size: 1.55rem;
-      font-weight: 400;
-      white-space: nowrap;
-    }
-    .category-title::after {
-      content: "";
-      height: 1px;
-      flex: 1;
-      background: var(--line);
-    }
-    .category-note {
-      margin: -13px 0 20px;
-      color: var(--muted);
-      font-family: var(--serif);
-      font-size: .92rem;
-      font-style: italic;
-    }
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 17px;
-    }
-    .product-card {
-      position: relative;
-      min-height: 175px;
-      padding: 25px 25px 22px;
-      overflow: hidden;
-      border: 1px solid rgba(129,117,102,.16);
-      border-radius: var(--radius);
-      background: rgba(255, 252, 246, .78);
-      box-shadow: 0 7px 22px rgba(57,47,37,.035);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .product-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-    .product-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 15px;
-    }
-    .product-card h4 {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: 1.28rem;
-      font-weight: 400;
-      line-height: 1.2;
-    }
-    .price {
-      flex: 0 0 auto;
-      color: var(--taupe);
-      font-family: var(--serif);
-      font-size: 1.22rem;
-      white-space: nowrap;
-    }
-    .product-description {
-      margin: 12px 0 11px;
-      color: #62594f;
-      font-size: .88rem;
-    }
-    .ingredients {
-      margin: 0;
-      color: #8a7d6e;
-      font-size: .72rem;
-      line-height: 1.5;
-    }
-    .ingredients strong {
-      color: #6e6255;
+      gap: 1rem;
+      margin: 0 0 1.25rem;
+      font-family: var(--fuente-titulo);
       font-weight: 700;
+      font-size: 1.75rem;
     }
-    .specials {
-      padding: 82px 20px;
-      color: var(--ivory);
+
+    .categoria-titulo::after {
+      content: "";
+      flex: 1;
+      height: 1.5px;
       background: var(--taupe);
     }
-    .specials .section-kicker { color: #e6d6bd; }
-    .specials .section-heading p:last-child { color: rgba(255,242,217,.76); }
-    .special-grid {
+
+    .tarjetas {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-      width: min(900px, 100%);
-      margin: 35px auto 0;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+      gap: 1.25rem;
     }
-    .special-card {
-      padding: 29px;
-      border: 1px solid rgba(255,242,217,.3);
-      border-radius: var(--radius);
-      background: rgba(255,242,217,.08);
-    }
-    .special-label {
-      display: inline-block;
-      margin-bottom: 14px;
-      color: #e9d9c1;
-      font-size: .62rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-    .special-card h3 {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: 1.7rem;
-      font-weight: 400;
-    }
-    .special-card p { margin: 12px 0 0; color: rgba(255,242,217,.82); font-size: .9rem; }
-    .special-card .special-price { display: block; margin-top: 17px; color: #fff2d9; font-family: var(--serif); font-size: 1.35rem; }
 
-    .cta {
-      padding: 75px 20px;
-      text-align: center;
-      background: var(--ivory);
+    .tarjeta {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.1rem;
+      padding: 1.4rem;
+      background: var(--tarjeta);
+      border: 1px solid var(--borde);
+      border-radius: 22px;
     }
-    .cta h2 {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 400;
-    }
-    .cta p { margin: 14px 0 25px; color: var(--muted); }
-    .cta .button { color: var(--ivory); background: var(--taupe); }
 
-    .about {
-      padding: 75px 20px;
-      background: var(--paper);
-    }
-    .about-inner {
+    /* Icono dentro de un doble aro, como el logotipo */
+    .tarjeta-icono {
+      flex: none;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 55px;
-      align-items: center;
-      width: min(960px, 100%);
-      margin: auto;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      margin: 5px 6px 0 5px;
+      border: 2px solid var(--taupe);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--tarjeta), 0 0 0 5.5px var(--taupe);
+      color: var(--cafe-medio);
     }
-    .about-copy p { max-width: 470px; color: var(--muted); }
-    .about-details {
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fffaf1;
-    }
-    .detail-row { padding: 12px 0; border-bottom: 1px solid var(--line); }
-    .detail-row:last-child { border-bottom: 0; }
-    .detail-row strong {
-      display: block;
-      margin-bottom: 3px;
-      color: var(--taupe);
-      font-size: .68rem;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-    .detail-row span { font-family: var(--serif); font-size: 1.05rem; }
 
-    footer {
-      padding: 30px 20px;
-      color: rgba(255,242,217,.85);
-      background: #5f554b;
-      text-align: center;
+    .icono {
+      width: 30px;
+      height: 30px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
-    footer strong {
-      display: block;
-      color: var(--ivory);
-      font-family: var(--serif);
+
+    .tarjeta-cabecera {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .tarjeta-nombre {
+      margin: 0;
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
       font-size: 1.25rem;
-      font-weight: 400;
-      letter-spacing: .16em;
+      line-height: 1.2;
     }
-    footer small { display: block; margin-top: 7px; font-size: .68rem; letter-spacing: .12em; }
 
-    @media (max-width: 760px) {
-      .header-inner { width: min(100% - 28px, 1160px); min-height: 70px; }
-      .brand-logo { width: 44px; height: 44px; }
-      .brand-name { font-size: 1.08rem; }
-      .brand-subtitle { font-size: .5rem; }
-      .nav { gap: 14px; font-size: .7rem; }
-      .nav a:not(.nav-cta) { display: none; }
-      .nav .nav-cta { padding: 10px 15px; }
-      .hero { min-height: 510px; padding: 75px 20px; }
-      .intro { padding: 68px 0 52px; }
-      .menu-section { padding: 58px 16px 65px; }
-      .product-grid { grid-template-columns: 1fr; gap: 13px; }
-      .product-card { min-height: 0; padding: 22px; }
-      .special-grid { grid-template-columns: 1fr; }
-      .about-inner { grid-template-columns: 1fr; gap: 28px; }
+    .precio {
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 1.25rem;
+      white-space: nowrap;
     }
-    @media (max-width: 380px) {
-      .brand { gap: 8px; }
-      .brand-logo { width: 38px; height: 38px; }
-      .brand-name { font-size: .96rem; }
-      .brand-subtitle { letter-spacing: .12em; }
-      .product-top { gap: 8px; }
-      .product-card h4 { font-size: 1.15rem; }
-      .price { font-size: 1.1rem; }
+
+    .tarjeta-desc { margin: 0.4rem 0 0.7rem; }
+
+    .tarjeta-ingredientes {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--cafe-medio);
     }
+
+    .insignia {
+      display: inline-block;
+      margin-top: 0.35rem;
+      padding: 0.1rem 0.7rem;
+      border-radius: 999px;
+      background: var(--taupe-claro);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .nota-menu {
+      margin: 2.5rem 0 0;
+      font-size: 0.92rem;
+      color: var(--cafe-medio);
+    }
+
+    /* ---------- Especialidades de la casa ---------- */
+    .especialidades {
+      background: var(--cafe);
+      color: var(--crema);
+    }
+
+    .especialidades .seccion-intro { color: #E6DACB; }
+
+    .destacados {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+      gap: 1.5rem;
+    }
+
+    .destacado {
+      padding: 2rem;
+      border: 1.5px solid rgba(253, 245, 232, 0.45);
+      border-radius: 28px;
+    }
+
+    .destacado .tarjeta-icono {
+      margin: 5px 5px 1.5rem;
+      border-color: var(--crema);
+      box-shadow: 0 0 0 4px var(--cafe), 0 0 0 5.5px var(--crema);
+      color: var(--crema);
+    }
+
+    .destacado-nombre {
+      margin: 0 0 0.6rem;
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 1.8rem;
+      line-height: 1.15;
+    }
+
+    .destacado p { margin: 0 0 0.9rem; }
+
+    .destacado .destacado-ingredientes {
+      font-size: 0.95rem;
+      color: #E6DACB;
+    }
+
+    .destacado .destacado-porque { font-weight: 600; }
+
+    .destacado .destacado-precio {
+      margin: 1.25rem 0 0;
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 1.9rem;
+    }
+
+    /* ---------- Información del restaurante ---------- */
+    .informacion { background: var(--taupe-claro); }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .info-grid h3 {
+      margin: 0 0 0.4rem;
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .info-grid p { margin: 0; }
+
+    .pedido {
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1.5px solid var(--taupe);
+    }
+
+    .pedido-frase {
+      max-width: 30rem;
+      margin: 0 0 1.5rem;
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      line-height: 1.2;
+    }
+
+    /* ---------- Pie de página ---------- */
+    .pie {
+      padding: 2.5rem 0;
+      background: var(--cafe-texto);
+      color: var(--crema);
+      text-align: center;
+    }
+
+    .pie-nombre {
+      margin: 0;
+      font-family: var(--fuente-titulo);
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .pie p { margin: 0.2rem 0 0; }
+    .pie .pie-derechos { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
+
+    /* ---------- Teléfonos y tabletas ---------- */
+    @media (max-width: 700px) {
+      .hero-aros { right: -30%; width: 110vw; opacity: 0.5; }
+      .tarjeta { padding: 1.15rem; }
+      .destacado { padding: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .marca-nombre { font-size: 1.25rem; }
+      .navegacion ul { gap: 0.25rem 1.1rem; }
+      .navegacion a { font-size: 0.95rem; }
+    }
+
+    /* Respeta a quienes prefieren menos movimiento */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { transition-duration: .01ms !important; }
+      .aro { animation: none; }
     }
   </style>
 </head>
 
 <body>
-  <!-- ENCABEZADO: modifica aquí el nombre y el logotipo del restaurante. -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="#inicio" aria-label="Casa Capri, inicio">
-        <img class="brand-logo" src="logo.png" alt="Logotipo de Casa Capri"
-             onerror="this.style.display='none'">
-        <span>
-          <span class="brand-name">CASA CAPRI</span>
-          <span class="brand-subtitle">Cucina italiana moderna</span>
-        </span>
+
+  <!-- Iconos sencillos (no necesitas tocar esto). Se reutilizan en las tarjetas con: <use href="#i-pan"> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-pan" viewBox="0 0 48 48">
+      <path d="M8 28c0-8 7-14 16-14s16 6 16 14v4a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2z"/>
+      <path d="M18 21l3 5M25 20l3 5M32 22l2 4"/>
+    </symbol>
+    <symbol id="i-pasta" viewBox="0 0 48 48">
+      <path d="M8 24h32c0 9-6 16-16 16S8 33 8 24z"/>
+      <path d="M16 24c0-5 4-8 8-8s8 3 8 8"/>
+      <path d="M24 16c0-3 2-5 4-6M18 43h12"/>
+    </symbol>
+    <symbol id="i-pizza" viewBox="0 0 48 48">
+      <path d="M8 12c10-6 22-6 32 0L24 42z"/>
+      <circle cx="20" cy="20" r="2"/>
+      <circle cx="28" cy="22" r="2"/>
+      <circle cx="24" cy="31" r="2"/>
+    </symbol>
+    <symbol id="i-postre" viewBox="0 0 48 48">
+      <path d="M12 22h24l-3 16a2 2 0 0 1-2 2H17a2 2 0 0 1-2-2z"/>
+      <path d="M16 22c0-5 3-8 8-8s8 3 8 8"/>
+      <circle cx="24" cy="9" r="2"/>
+    </symbol>
+  </svg>
+
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="cabecera">
+    <div class="contenedor cabecera-fila">
+
+      <a class="marca" href="#inicio" aria-label="Casa Capri, ir al inicio">
+        <!-- CAMBIAR LOGO: sube tu archivo con el nombre logo.png en la misma carpeta que index.html.
+             Si tu archivo tiene otro nombre, cámbialo aquí en src="..." -->
+        <img src="logo.png" alt="Logotipo de Casa Capri" width="52" height="52">
+        <!-- CAMBIAR NOMBRE: nombre del restaurante en el encabezado -->
+        <span class="marca-nombre">Casa Capri</span>
       </a>
-      <nav class="nav" aria-label="Navegación principal">
-        <a href="#menu">Menú</a>
-        <a href="#especialidades">Especialidades</a>
-        <a href="#nosotros">Nosotros</a>
-        <a class="nav-cta" href="#menu">Ver menú</a>
+
+      <nav class="navegacion" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#especialidades">Especialidades</a></li>
+          <li><a href="#visitanos">Visítanos</a></li>
+        </ul>
       </nav>
+
     </div>
   </header>
 
   <main>
-    <!-- BIENVENIDA -->
+
+    <!-- ===================== BIENVENIDA ===================== -->
     <section class="hero" id="inicio">
-      <div class="hero-content">
-        <p class="eyebrow">Manta · Ecuador</p>
-        <h1><span>Benvenuti a</span>CASA CAPRI</h1>
-        <p class="hero-copy">Italia en cada bocado, momentos para compartir.</p>
-        <a class="button" href="#menu">Ver menú</a>
-      </div>
-    </section>
 
-    <section class="intro" aria-labelledby="intro-title">
-      <p class="section-kicker">Una mesa para todos</p>
-      <h2 id="intro-title">El sabor de Italia,<br>hecho para compartir.</h2>
-      <p>Casa Capri es un restaurante de cocina italiana moderna en Manta, donde los sabores tradicionales se encuentran con propuestas contemporáneas. Un espacio pensado para disfrutar de pastas, pizzas y especialidades italianas en familia.</p>
-    </section>
+      <!-- Aros dibujados a mano (decorativos) -->
+      <svg class="hero-aros" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+        <path class="aro aro-1" pathLength="1"
+              d="M200 30C300 28 372 100 370 200C368 300 298 372 198 370C98 368 30 298 32 198C34 98 102 32 200 30Z"/>
+        <path class="aro aro-2" pathLength="1"
+              d="M205 38C305 40 366 108 362 206C358 304 292 366 192 362C92 358 36 292 40 192C44 96 110 36 205 38Z"/>
+      </svg>
 
-    <!-- MENÚ: para agregar productos, duplica una tarjeta .product-card.
-         Para cambiar un precio, modifica el valor que aparece en .price. -->
-    <section class="menu-section" id="menu">
-      <div class="menu-wrap">
-        <div class="section-heading">
-          <p class="section-kicker">La nostra cucina</p>
-          <h2>Descubre nuestro menú</h2>
-          <p>Preparaciones para disfrutar sin prisa y compartir en buena compañía.</p>
-        </div>
+      <div class="contenedor">
+        <div class="hero-texto">
+          <!-- Frase publicitaria (puedes cambiarla por otra) -->
+          <h1>Cocina italiana, hecha con calma.</h1>
 
-        <div class="category" id="antipasti">
-          <div class="category-title"><h3>Antipasti</h3></div>
-          <p class="category-note">Pequeños comienzos, grandes sabores.</p>
-          <div class="product-grid">
-            <article class="product-card">
-              <div class="product-top"><h4>Bruschetta Toscana</h4><span class="price">$5,50</span></div>
-              <p class="product-description">Pan artesanal tostado con tomate fresco, albahaca y aceite de oliva.</p>
-              <p class="ingredients"><strong>Ingredientes:</strong> pan artesanal, tomate, albahaca, ajo y aceite de oliva.</p>
-            </article>
-            <article class="product-card">
-              <div class="product-top"><h4>Caprese di Capri</h4><span class="price">$7,00</span></div>
-              <p class="product-description">Una combinación fresca de mozzarella, tomate y albahaca con un delicado toque de aceite de oliva.</p>
-              <p class="ingredients"><strong>Ingredientes:</strong> mozzarella, tomate, albahaca fresca, aceite de oliva y reducción balsámica.</p>
-            </article>
-          </div>
-        </div>
+          <!-- Descripción comercial del restaurante -->
+          <p class="hero-descripcion">
+            En Casa Capri reinterpretamos la cocina italiana con un toque moderno y artesanal.
+            Pastas, pizzas y postres preparados con ingredientes frescos, pensados para compartir en familia en el corazón de Manta.
+          </p>
 
-        <div class="category" id="paste">
-          <div class="category-title"><h3>Paste e Risotti</h3></div>
-          <p class="category-note">La esencia de Italia en cada preparación.</p>
-          <div class="product-grid">
-            <article class="product-card">
-              <div class="product-top"><h4>Penne al Pesto</h4><span class="price">$9,50</span></div>
-              <p class="product-description">Penne bañados en pesto de albahaca, con parmesano y un toque de nueces.</p>
-              <p class="ingredients"><strong>Ingredientes:</strong> pasta penne, albahaca, parmesano, nueces, ajo y aceite de oliva.</p>
-            </article>
-            <article class="product-card">
-              <div class="product-top"><h4>Fettuccine Alfredo</h4><span class="price">$10,50</span></div>
-              <p class="product-description">Pasta fresca acompañada de una cremosa salsa Alfredo con parmesano y un toque de pimienta.</p>
-              <p class="ingredients"><strong>Ingredientes:</strong> fettuccine, crema de leche, mantequilla, parmesano y pimienta negra.</p>
-            </article>
-            <article class="product-card">
-              <div class="product-top"><h4>Linguine al Mare</h4><span class="price">$13,50</span></div>
-              <p class="product-description">Linguine con camarones salteados, ajo y tomate cherry en una salsa ligera de aceite de oliva.</p>
-              <p class="ingredients"><strong>Ingredientes:</strong> linguine, camarones, tomate cherry, ajo, perejil y aceite de oliva.</p>
-            </article>
-          </div>
-        </div>
-
-        <div class="category" id="pizze">
-          <div class="category-title"><h3>Pizze Artigianali</h3></div>
-          <p class="category-note">Tradición italiana horneada para compartir.</p>
-          <div class="product-grid">
-            <article class="product-card">
-              <div class="product-top"><h4>Pizza Margherita</h4><span class="price">$10,00</span></div>
-              <p class="product-description">Masa artesanal con salsa de tomate, mozzarella fundida y hojas frescas de albahaca.</p>
-              <p class="ingredients"><strong>Ingredientes:</strong> masa artesanal, salsa de tomate, mozzarella, albahaca y aceite de oliva.</p>
-            </article>
-            <article class="product-card">
-              <div class="product-top"><h4>Pizza Capri Speciale</h4><span class="price">$13,00</span></div>
-              <p class="product-description">Una combinación de jamón, champiñones y mozzarella sobre una base de tomate artesanal.</p>
-              <p class="ingredients"><strong>Ingredientes:</strong> masa artesanal, salsa de tomate, mozzarella, jamón, champiñones y orégano.</p>
-            </article>
-          </div>
-        </div>
-
-        <div class="category" id="dolci">
-          <div class="category-title"><h3>Dolci</h3></div>
-          <p class="category-note">El toque dulce para terminar.</p>
-          <div class="product-grid">
-            <article class="product-card">
-              <div class="product-top"><h4>Tiramisù della Casa</h4><span class="price">$5,00</span></div>
-              <p class="product-description">Clásico postre italiano con capas de bizcocho, crema de mascarpone y un delicado toque de café.</p>
-              <p class="ingredients"><strong>Ingredientes:</strong> bizcocho, mascarpone, café, cacao y azúcar.</p>
-            </article>
+          <div class="hero-acciones">
+            <!-- Botón principal: lleva a la sección del menú -->
+            <a class="boton" href="#menu">Ver menú</a>
+            <a class="enlace-suave" href="#especialidades">Conoce las especialidades</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ESPECIALIDADES DE LA CASA -->
-    <section class="specials" id="especialidades">
-      <div class="section-heading">
-        <p class="section-kicker">Consigliati dalla casa</p>
-        <h2>Especialidades de la casa</h2>
-        <p>Dos favoritos para descubrir la propuesta de Casa Capri.</p>
-      </div>
-      <div class="special-grid">
-        <article class="special-card">
-          <span class="special-label">Especialidad · Pasta y mar</span>
-          <h3>Linguine al Mare</h3>
-          <p>Pasta con camarones, ajo y tomate cherry. Una propuesta que une sabores italianos con el carácter costero de Manta.</p>
-          <span class="special-price">$13,50</span>
-        </article>
-        <article class="special-card">
-          <span class="special-label">Especialidad · Dolce</span>
-          <h3>Tiramisù della Casa</h3>
-          <p>Un clásico italiano de mascarpone, café y cacao para cerrar la experiencia con un toque dulce.</p>
-          <span class="special-price">$5,00</span>
-        </article>
+
+    <!-- ===================== MENÚ ===================== -->
+    <section class="seccion" id="menu">
+      <div class="contenedor">
+
+        <h2 class="seccion-titulo">Nuestro menú</h2>
+        <p class="seccion-intro">Platos para compartir, pastas, pizzas artesanales y postres. Elige por categoría.</p>
+
+        <!-- Accesos rápidos a cada categoría -->
+        <nav class="categorias-nav" aria-label="Categorías del menú">
+          <a href="#para-empezar">Para empezar</a>
+          <a href="#pastas">Pastas</a>
+          <a href="#pizzas">Pizzas artesanales</a>
+          <a href="#dulce-final">Dulce final</a>
+        </nav>
+
+
+        <!-- ============ CATEGORÍA: PARA EMPEZAR ============
+             NUEVO PRODUCTO: copia una tarjeta completa (desde <article> hasta </article>),
+             pégala dentro de esta misma categoría y cambia los textos.
+             CAMBIAR PRECIO: edita el valor dentro de <span class="precio">. -->
+        <div class="categoria" id="para-empezar">
+          <h3 class="categoria-titulo">Para empezar</h3>
+          <div class="tarjetas">
+
+            <article class="tarjeta">
+              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pan"/></svg></div>
+              <div>
+                <div class="tarjeta-cabecera">
+                  <h4 class="tarjeta-nombre">Focaccia Capri</h4>
+                  <span class="precio">$5.50</span>
+                </div>
+                <p class="tarjeta-desc">Focaccia tibia con aceite de oliva y romero, acompañada de salsa de tomate casera para compartir.</p>
+                <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> harina, aceite de oliva, romero, sal marina, tomate.</p>
+              </div>
+            </article>
+
+            <article class="tarjeta">
+              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pan"/></svg></div>
+              <div>
+                <div class="tarjeta-cabecera">
+                  <h4 class="tarjeta-nombre">Tostadas Giardino</h4>
+                  <span class="precio">$6.00</span>
+                </div>
+                <p class="tarjeta-desc">Pan rústico crujiente con tomate fresco, albahaca y un toque de ajo. Ligeras y perfectas para abrir la mesa.</p>
+                <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> pan rústico, tomate, albahaca, ajo, aceite de oliva.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+
+        <!-- ============ CATEGORÍA: PASTAS ============ -->
+        <div class="categoria" id="pastas">
+          <h3 class="categoria-titulo">Pastas</h3>
+          <div class="tarjetas">
+
+            <article class="tarjeta">
+              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pasta"/></svg></div>
+              <div>
+                <div class="tarjeta-cabecera">
+                  <h4 class="tarjeta-nombre">Rosso Semplice</h4>
+                  <span class="precio">$9.50</span>
+                </div>
+                <p class="tarjeta-desc">Spaghetti en salsa de tomate cocida lentamente con albahaca. Sencillo, suave y pensado para todas las edades.</p>
+                <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> spaghetti, tomate, albahaca, cebolla, aceite de oliva, queso parmesano.</p>
+              </div>
+            </article>
+
+            <article class="tarjeta">
+              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pasta"/></svg></div>
+              <div>
+                <div class="tarjeta-cabecera">
+                  <h4 class="tarjeta-nombre">Fettuccine Bosco</h4>
+                  <span class="precio">$11.50</span>
+                </div>
+                <p class="tarjeta-desc">Fettuccine con champiñones salteados en una salsa cremosa de parmesano y un toque de perejil.</p>
+                <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> fettuccine, champiñones, crema de leche, parmesano, ajo, perejil.</p>
+              </div>
+            </article>
+
+            <!-- Especialidad de la casa (la insignia se muestra con <span class="insignia">) -->
+            <article class="tarjeta">
+              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pasta"/></svg></div>
+              <div>
+                <div class="tarjeta-cabecera">
+                  <h4 class="tarjeta-nombre">Lasagna Capri</h4>
+                  <span class="precio">$12.50</span>
+                </div>
+                <span class="insignia">Especialidad de la casa</span>
+                <p class="tarjeta-desc">Capas de pasta, salsa de carne y bechamel, gratinadas con mozzarella. Una porción generosa para compartir.</p>
+                <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> pasta de lasaña, carne molida, salsa de tomate, bechamel, mozzarella.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+
+        <!-- ============ CATEGORÍA: PIZZAS ARTESANALES ============ -->
+        <div class="categoria" id="pizzas">
+          <h3 class="categoria-titulo">Pizzas artesanales</h3>
+          <div class="tarjetas">
+
+            <article class="tarjeta">
+              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pizza"/></svg></div>
+              <div>
+                <div class="tarjeta-cabecera">
+                  <h4 class="tarjeta-nombre">Pizza Capri</h4>
+                  <span class="precio">$10.50</span>
+                </div>
+                <p class="tarjeta-desc">Masa fina con salsa de tomate, mozzarella y albahaca fresca. La clásica combinación caprese, sin complicaciones.</p>
+                <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> masa de pizza, tomate, mozzarella, albahaca, aceite de oliva.</p>
+              </div>
+            </article>
+
+            <article class="tarjeta">
+              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pizza"/></svg></div>
+              <div>
+                <div class="tarjeta-cabecera">
+                  <h4 class="tarjeta-nombre">Pizza Gran Casa</h4>
+                  <span class="precio">$12.50</span>
+                </div>
+                <p class="tarjeta-desc">Jamón y champiñones sobre mozzarella derretida, con un toque de orégano. Una favorita para la mesa familiar.</p>
+                <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> masa de pizza, salsa de tomate, mozzarella, jamón, champiñones, orégano.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+
+        <!-- ============ CATEGORÍA: DULCE FINAL ============ -->
+        <div class="categoria" id="dulce-final">
+          <h3 class="categoria-titulo">Dulce final</h3>
+          <div class="tarjetas">
+
+            <article class="tarjeta">
+              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-postre"/></svg></div>
+              <div>
+                <div class="tarjeta-cabecera">
+                  <h4 class="tarjeta-nombre">Tiramisù Casa Capri</h4>
+                  <span class="precio">$5.50</span>
+                </div>
+                <p class="tarjeta-desc">Bizcochos suaves con café y crema de mascarpone, terminado con cacao. Cremoso y fácil de compartir.</p>
+                <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> bizcochos, café, mascarpone, huevo, azúcar, cacao.</p>
+              </div>
+            </article>
+
+            <!-- Especialidad de la casa -->
+            <article class="tarjeta">
+              <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-postre"/></svg></div>
+              <div>
+                <div class="tarjeta-cabecera">
+                  <h4 class="tarjeta-nombre">Panna Cotta de Maracuyá</h4>
+                  <span class="precio">$5.00</span>
+                </div>
+                <span class="insignia">Especialidad de la casa</span>
+                <p class="tarjeta-desc">Crema suave de textura delicada, coronada con salsa de maracuyá. Un toque local en un clásico italiano.</p>
+                <p class="tarjeta-ingredientes"><strong>Ingredientes:</strong> crema de leche, azúcar, gelatina, maracuyá.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Nota sobre precios -->
+        <p class="nota-menu">
+          Precios referenciales en dólares estadounidenses (USD). Si tienes alguna alergia o restricción alimentaria, avísanos al hacer tu pedido.
+        </p>
+
       </div>
     </section>
 
-    <!-- LLAMADA A LA ACCIÓN -->
-    <section class="cta">
-      <p class="section-kicker">A tavola!</p>
-      <h2>Un pedacito de Italia te espera.</h2>
-      <p>¡Haz tu pedido y disfruta Casa Capri!</p>
-      <a class="button" href="#menu">Explorar el menú</a>
-    </section>
 
-    <!-- INFORMACIÓN DEL RESTAURANTE -->
-    <section class="about" id="nosotros">
-      <div class="about-inner">
-        <div class="about-copy">
-          <p class="section-kicker">La nostra casa</p>
-          <h2>Tradición italiana,<br>espíritu moderno.</h2>
-          <p>En Casa Capri celebramos la cocina italiana con una propuesta cercana y contemporánea. Queremos que cada visita sea una oportunidad para disfrutar buenos sabores y compartir en familia.</p>
-        </div>
-        <div class="about-details">
-          <div class="detail-row">
-            <strong>Restaurante</strong>
-            <span>Casa Capri · Cucina Italiana Moderna</span>
-          </div>
-          <div class="detail-row">
-            <strong>Ubicación</strong>
-            <span>Manta, Manabí, Ecuador</span>
-          </div>
-          <div class="detail-row">
-            <strong>Concepto</strong>
-            <span>Cocina italiana moderna</span>
-          </div>
-          <div class="detail-row">
-            <strong>Experiencia</strong>
-            <span>Sabores para disfrutar en familia</span>
-          </div>
+    <!-- ===================== ESPECIALIDADES DE LA CASA ===================== -->
+    <section class="seccion especialidades" id="especialidades">
+      <div class="contenedor">
+
+        <h2 class="seccion-titulo">Especialidades de la casa</h2>
+        <p class="seccion-intro">Dos platos que resumen cómo entendemos la cocina italiana en Casa Capri.</p>
+
+        <div class="destacados">
+
+          <article class="destacado">
+            <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pasta"/></svg></div>
+            <h3 class="destacado-nombre">Lasagna Capri</h3>
+            <p>Capas de pasta, salsa de carne y bechamel, gratinadas con mozzarella. Una porción generosa para compartir.</p>
+            <p class="destacado-ingredientes"><strong>Ingredientes:</strong> pasta de lasaña, carne molida, salsa de tomate, bechamel, mozzarella.</p>
+            <p class="destacado-porque">Por qué la destacamos: es un plato reconfortante, fácil de compartir y querido por todas las edades.</p>
+            <!-- CAMBIAR PRECIO: si cambias el precio en el menú, cámbialo también aquí -->
+            <p class="destacado-precio">$12.50</p>
+          </article>
+
+          <article class="destacado">
+            <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-postre"/></svg></div>
+            <h3 class="destacado-nombre">Panna Cotta de Maracuyá</h3>
+            <p>Crema suave de textura delicada, coronada con salsa de maracuyá. Un toque local en un clásico italiano.</p>
+            <p class="destacado-ingredientes"><strong>Ingredientes:</strong> crema de leche, azúcar, gelatina, maracuyá.</p>
+            <p class="destacado-porque">Por qué la destacamos: une una receta clásica con una fruta cercana, justo lo que entendemos por cocina italiana moderna.</p>
+            <p class="destacado-precio">$5.00</p>
+          </article>
+
         </div>
       </div>
     </section>
+
+
+    <!-- ===================== INFORMACIÓN DEL RESTAURANTE ===================== -->
+    <section class="seccion informacion" id="visitanos">
+      <div class="contenedor">
+
+        <h2 class="seccion-titulo">Visítanos</h2>
+        <p class="seccion-intro" style="color: var(--cafe-texto);">
+          Casa Capri es cocina italiana moderna para toda la familia, con una propuesta artesanal y sencilla.
+        </p>
+
+        <!-- CAMBIAR DATOS: estos son datos de ejemplo. Reemplázalos por los de tu proyecto. -->
+        <div class="info-grid">
+          <div>
+            <h3>Ubicación</h3>
+            <p>Manta, Ecuador</p>
+          </div>
+          <div>
+            <h3>Horario</h3>
+            <p>Martes a domingo, de 12:00 a 21:00 (horario referencial)</p>
+          </div>
+          <div>
+            <h3>Pedidos y reservas</h3>
+            <p>Escríbenos por WhatsApp y te ayudamos a elegir.</p>
+          </div>
+        </div>
+
+        <!-- Llamada a la acción -->
+        <div class="pedido">
+          <p class="pedido-frase">Haz tu pedido hoy y comparte la mesa con Casa Capri.</p>
+          <!-- CAMBIAR DATOS: reemplaza el número de ejemplo por el de WhatsApp.
+               Formato: código de país 593 + número sin el 0 inicial (ej.: 593991234567) -->
+          <a class="boton" href="https://wa.me/593900000000" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
-  <!-- PIE DE PÁGINA: puedes actualizar aquí el nombre o el texto final. -->
-  <footer>
-    <strong>CASA CAPRI</strong>
-    <small>CUCINA ITALIANA MODERNA · MANTA, ECUADOR</small>
-    <small>© <span id="year">2026</span> Casa Capri. Todos los derechos reservados.</small>
+
+  <!-- ===================== PIE DE PÁGINA ===================== -->
+  <footer class="pie">
+    <div class="contenedor">
+      <!-- CAMBIAR NOMBRE: nombre del restaurante en el pie de página -->
+      <p class="pie-nombre">Casa Capri</p>
+      <p>Cucina italiana moderna</p>
+      <p>Manta, Ecuador</p>
+      <p class="pie-derechos">&copy; 2026 Casa Capri. Todos los derechos reservados.</p>
+    </div>
   </footer>
 
-  <script>
-    // Actualiza automáticamente el año del pie de página.
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>

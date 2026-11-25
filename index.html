@@ -541,6 +541,152 @@
       stroke-linejoin: round;
     }
 
+    .configurador-pizza {
+      display: grid;
+      grid-template-columns: minmax(250px, 0.9fr) minmax(0, 1.1fr);
+      overflow: hidden;
+      margin: 0 0 1.5rem;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      background: var(--tarjeta);
+      box-shadow: 0 12px 30px rgba(47, 39, 31, 0.08);
+    }
+
+    .configurador-pizza[hidden] { display: none; }
+
+    .configurador-visual {
+      position: relative;
+      min-height: 100%;
+      background: #8d7155;
+    }
+
+    .configurador-visual::after {
+      position: absolute;
+      inset: 45% 0 0;
+      background: linear-gradient(transparent, rgba(28, 22, 17, 0.7));
+      content: "";
+    }
+
+    .configurador-foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    .configurador-leyenda {
+      position: absolute;
+      z-index: 1;
+      right: 1.25rem;
+      bottom: 1.1rem;
+      left: 1.25rem;
+      color: white;
+      font: 700 1.45rem/1.1 var(--fuente-titulo);
+    }
+
+    .configurador-contenido { padding: clamp(1.25rem, 3vw, 2rem); }
+
+    .configurador-etiqueta {
+      margin: 0 0 0.35rem;
+      color: #806344;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .configurador-titulo {
+      margin: 0;
+      font: 700 clamp(1.6rem, 3vw, 2rem)/1.1 var(--fuente-titulo);
+    }
+
+    .configurador-descripcion { margin: 0.5rem 0 1.2rem; color: var(--cafe-medio); font-size: 0.92rem; }
+
+    .opciones-pizza {
+      min-width: 0;
+      margin: 0 0 1rem;
+      padding: 0;
+      border: 0;
+    }
+
+    .opciones-pizza legend { margin-bottom: 0.55rem; font-size: 0.9rem; font-weight: 800; }
+
+    .tamanos-pizza {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .opcion-tamano { position: relative; cursor: pointer; }
+
+    .opcion-tamano input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    .tamano-pizza {
+      display: grid;
+      gap: 0.18rem;
+      min-height: 62px;
+      padding: 0.6rem;
+      border: 1px solid var(--borde);
+      border-radius: 9px;
+      background: #fff;
+      transition: border-color 150ms ease, background 150ms ease;
+    }
+
+    .tamano-pizza strong { font-size: 0.9rem; }
+    .tamano-pizza small { color: var(--cafe-medio); font-size: 0.75rem; }
+
+    .opcion-tamano input:checked + .tamano-pizza {
+      border-color: var(--cafe);
+      background: #f0e7dc;
+      box-shadow: inset 0 0 0 1px var(--cafe);
+    }
+
+    .opcion-tamano input:focus-visible + .tamano-pizza {
+      outline: 3px solid var(--taupe);
+      outline-offset: 2px;
+    }
+
+    .extras-pizza { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem 0.8rem; }
+    .extra-pizza { display: flex; align-items: center; gap: 0.45rem; color: var(--cafe-texto); font-size: 0.87rem; cursor: pointer; }
+    .extra-pizza input { width: 17px; height: 17px; accent-color: #236f50; }
+    .extra-pizza span { flex: 1; }
+    .extra-pizza small { color: var(--cafe-medio); white-space: nowrap; }
+
+    .configurador-resumen {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.1rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--borde);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .configurador-total { font: 700 1.55rem var(--fuente-titulo); white-space: nowrap; }
+
+    .configurador-agregar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      min-height: 46px;
+      margin-top: 0.9rem;
+      padding: 0.7rem 1rem;
+      border: 0;
+      border-radius: 999px;
+      background: #236f50;
+      color: white;
+      font: 800 0.92rem var(--fuente-texto);
+      cursor: pointer;
+    }
+
+    .configurador-agregar:hover { background: #18563c; }
+    .configurador-agregar:focus-visible { outline: 3px solid var(--taupe); outline-offset: 3px; }
+    .configurador-agregar svg { flex: none; width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+
     .insignia {
       display: inline-block;
       margin-top: 0.35rem;
@@ -670,10 +816,830 @@
     .pie p { margin: 0.2rem 0 0; }
     .pie .pie-derechos { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
 
+    /* ---------- Experiencia renovada ---------- */
+    .franja {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 38px;
+      padding: 0.35rem 1rem;
+      background: var(--cafe);
+      color: var(--crema);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-align: center;
+    }
+
+    .franja a { color: inherit; text-underline-offset: 3px; }
+
+    .cabecera {
+      background: rgba(253, 245, 232, 0.96);
+      backdrop-filter: blur(14px);
+    }
+
+    .cabecera-fila { min-height: 82px; }
+    .marca-sello { background: var(--cafe); }
+    .marca-lema { color: var(--cafe-medio); letter-spacing: 0.08em; }
+
+    .navegacion a {
+      padding: 0.5rem 0.1rem;
+      transition: color 160ms ease, border-color 160ms ease;
+    }
+
+    .navegacion a:hover { color: #806344; }
+
+    .boton-carrito {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 44px;
+      padding: 0.55rem 1rem;
+      border: 1px solid var(--cafe);
+      border-radius: 999px;
+      background: var(--cafe);
+      color: var(--crema);
+      font: 700 0.93rem var(--fuente-texto);
+      cursor: pointer;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .boton-carrito:hover { transform: translateY(-1px); background: var(--cafe-texto); }
+    .boton-carrito svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+    .carrito-cantidad {
+      display: grid;
+      place-items: center;
+      min-width: 22px;
+      height: 22px;
+      padding-inline: 0.25rem;
+      border-radius: 50%;
+      background: var(--crema);
+      color: var(--cafe);
+      font-size: 0.76rem;
+    }
+
+    .hero {
+      padding: clamp(3rem, 7vw, 6rem) 0;
+      background:
+        radial-gradient(ellipse at 10% 12%, rgba(221, 211, 199, 0.58), transparent 28rem),
+        var(--crema);
+    }
+
+    .hero .contenedor {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5rem);
+    }
+
+    .hero-texto { max-width: 38rem; }
+
+    .hero-etiqueta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin: 0 0 1.1rem;
+      color: #70583e;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-etiqueta::before {
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+
+    .hero h1 {
+      max-width: 10ch;
+      margin-bottom: 1rem;
+      font-size: clamp(3.25rem, 6.4vw, 5.6rem);
+      letter-spacing: -0.045em;
+    }
+
+    .hero-descripcion { max-width: 34rem; color: var(--cafe-medio); }
+    .hero-acciones { gap: 0.9rem 1.3rem; }
+    .hero .boton { box-shadow: 0 10px 24px rgba(47, 39, 31, 0.16); }
+
+    .hero-visual {
+      position: relative;
+      min-height: 440px;
+      border-radius: 48% 48% 12px 12px;
+      background: #d3b99e;
+      box-shadow: 0 25px 60px rgba(47, 39, 31, 0.16);
+    }
+
+    .hero-foto {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      object-fit: cover;
+    }
+
+    .hero-visual::after {
+      position: absolute;
+      inset: 42% 0 0;
+      border-radius: inherit;
+      background: linear-gradient(transparent, rgba(28, 22, 17, 0.62));
+      content: "";
+      pointer-events: none;
+    }
+
+    .hero-sello {
+      position: absolute;
+      z-index: 1;
+      right: -1.2rem;
+      bottom: 1.5rem;
+      display: grid;
+      place-items: center;
+      width: 126px;
+      aspect-ratio: 1;
+      padding: 1rem;
+      border: 1px solid rgba(255, 252, 247, 0.7);
+      border-radius: 50%;
+      background: var(--crema);
+      color: var(--cafe);
+      font-family: var(--fuente-titulo);
+      font-size: 1.05rem;
+      line-height: 1.15;
+      text-align: center;
+      transform: rotate(8deg);
+      box-shadow: 0 10px 30px rgba(47, 39, 31, 0.2);
+    }
+
+    .hero-leyenda {
+      position: absolute;
+      z-index: 1;
+      right: 1.5rem;
+      bottom: 1.3rem;
+      left: 1.5rem;
+      color: white;
+      font-family: var(--fuente-titulo);
+      font-size: 1.35rem;
+    }
+
+    .hero-aros { z-index: 0; right: 35%; width: min(460px, 48vw); opacity: 0.16; }
+
+    .frase-marca {
+      padding: 1.1rem 1rem;
+      background: #e9dfd2;
+      color: var(--cafe);
+      font-family: var(--fuente-titulo);
+      font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+      text-align: center;
+    }
+
+    .frase-marca span { color: #8a6743; }
+
+    .seccion { padding-block: clamp(4rem, 8vw, 7rem); }
+    .seccion-titulo { letter-spacing: -0.025em; }
+    .menu-encabezado { align-items: center; }
+    .menu-encabezado .seccion-intro { margin-top: 0.65rem; }
+
+    .menu-controles {
+      padding-block: 1.15rem;
+      border-color: #d9cbbb;
+    }
+
+    .categoria-filtro { border-radius: 999px; }
+    .tarjetas { gap: 1.4rem; }
+    .tarjeta { border-radius: 12px; }
+    .tarjeta:hover { transform: translateY(-5px); }
+    .foto-plato { aspect-ratio: 16 / 9; }
+    .tarjeta-contenido { padding: 1.35rem; }
+
+    .pedido-plato {
+      width: 100%;
+      border-radius: 999px;
+      cursor: pointer;
+      font: 700 0.92rem var(--fuente-texto);
+    }
+
+    .especialidades {
+      background:
+        radial-gradient(ellipse at 95% 0%, rgba(221, 211, 199, 0.12), transparent 30rem),
+        var(--cafe);
+    }
+
+    .destacado { border-radius: 16px; background: rgba(255, 252, 247, 0.035); }
+    .informacion { background: #eee5d9; }
+    .info-grid > div {
+      padding: 1.3rem;
+      border: 1px solid rgba(75, 64, 54, 0.16);
+      border-radius: 12px;
+      background: rgba(255, 252, 247, 0.38);
+    }
+
+    .pie { padding-block: 3rem; }
+
+    .destacado {
+      overflow: hidden;
+      padding: 0;
+      border: 1px solid rgba(253, 245, 232, 0.28);
+      border-radius: 18px;
+      background: rgba(255, 252, 247, 0.045);
+      box-shadow: 0 18px 40px rgba(28, 22, 17, 0.16);
+    }
+
+    .destacado-imagen {
+      position: relative;
+      height: clamp(210px, 26vw, 310px);
+      overflow: hidden;
+      background: #79634e;
+    }
+
+    .destacado-imagen::after {
+      position: absolute;
+      inset: 45% 0 0;
+      background: linear-gradient(transparent, rgba(28, 22, 17, 0.44));
+      content: "";
+    }
+
+    .destacado-foto {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 450ms ease;
+    }
+
+    .destacado:hover .destacado-foto { transform: scale(1.045); }
+
+    .destacado-sello {
+      position: absolute;
+      z-index: 1;
+      right: 1rem;
+      bottom: 1rem;
+      padding: 0.45rem 0.85rem;
+      border: 1px solid rgba(255, 252, 247, 0.62);
+      border-radius: 999px;
+      background: rgba(47, 39, 31, 0.76);
+      color: var(--crema);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .destacado-contenido { padding: 1.5rem 1.7rem 1.7rem; }
+
+    .destacado-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.65rem;
+      color: #e6d4bd;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .destacado .destacado-precio {
+      margin: 0;
+      color: var(--crema);
+      font-size: 1.35rem;
+      letter-spacing: 0;
+    }
+
+    .destacado-nombre { font-size: clamp(1.55rem, 3vw, 2rem); }
+    .destacado-ingredientes { line-height: 1.5; }
+
+    .destacado-enlace {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+      color: var(--crema);
+      font-size: 0.92rem;
+      font-weight: 800;
+      text-underline-offset: 4px;
+    }
+
+    .visita-encabezado {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5rem);
+      margin-bottom: 2rem;
+    }
+
+    .visita-etiqueta,
+    .pedido-etiqueta {
+      margin: 0 0 0.7rem;
+      color: #806344;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .visita-encabezado .seccion-titulo { margin-bottom: 0.8rem; }
+    .visita-encabezado .seccion-intro { margin: 0; color: var(--cafe-medio); }
+
+    .visita-visual {
+      position: relative;
+      min-height: 300px;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #8c765f;
+      box-shadow: 0 18px 40px rgba(47, 39, 31, 0.16);
+    }
+
+    .visita-visual::after {
+      position: absolute;
+      inset: 45% 0 0;
+      background: linear-gradient(transparent, rgba(28, 22, 17, 0.68));
+      content: "";
+    }
+
+    .visita-foto { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; }
+
+    .visita-pie-foto {
+      position: absolute;
+      z-index: 1;
+      right: 1.4rem;
+      bottom: 1.2rem;
+      left: 1.4rem;
+      color: white;
+      font-family: var(--fuente-titulo);
+      font-size: 1.35rem;
+    }
+
+    .info-grid { gap: 1rem; margin-top: 0; }
+
+    .info-grid > div {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      align-content: start;
+      align-items: start;
+      gap: 0.2rem 0.85rem;
+      padding: 1.35rem;
+      border-color: rgba(75, 64, 54, 0.13);
+      border-radius: 14px;
+      background: rgba(255, 252, 247, 0.64);
+      box-shadow: 0 8px 22px rgba(47, 39, 31, 0.045);
+    }
+
+    .info-icono {
+      grid-column: 1;
+      grid-row: 1;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #e6d8c6;
+      color: var(--cafe);
+    }
+
+    .info-icono svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .info-contenido { grid-column: 2; grid-row: 1; min-width: 0; }
+    .info-grid h3 { margin: 0; font-size: 1.15rem; }
+    .info-grid p { color: var(--cafe-medio); font-size: 0.95rem; line-height: 1.5; }
+
+    .info-enlace {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #236f50;
+      font: 800 0.9rem var(--fuente-texto);
+      text-align: left;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+
+    .info-enlace:hover { color: #18563c; }
+    .info-enlace:focus-visible { outline: 3px solid var(--taupe); outline-offset: 4px; }
+
+    .pedido {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      min-height: 330px;
+      overflow: hidden;
+      margin-top: clamp(2rem, 5vw, 4rem);
+      padding: 0;
+      border: 0;
+      border-radius: 20px;
+      background: var(--cafe);
+      color: var(--crema);
+      box-shadow: 0 20px 46px rgba(47, 39, 31, 0.19);
+    }
+
+    .pedido-contenido {
+      position: relative;
+      z-index: 1;
+      align-self: center;
+      padding: clamp(1.6rem, 4vw, 3.2rem);
+    }
+
+    .pedido-etiqueta { color: #e5cda9; }
+
+    .pedido-frase {
+      max-width: 13ch;
+      margin-bottom: 0.9rem;
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      letter-spacing: -0.035em;
+    }
+
+    .pedido-descripcion {
+      max-width: 34rem;
+      margin: 0 0 1.4rem;
+      color: #e6dacb;
+    }
+
+    .pedido-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1.2rem; }
+
+    .pedido .boton {
+      background: var(--crema);
+      color: var(--cafe);
+      box-shadow: none;
+    }
+
+    .pedido .boton:hover { background: white; }
+    .pedido-menu { color: var(--crema); font-weight: 700; text-underline-offset: 4px; }
+
+    .pedido-visual {
+      position: relative;
+      min-height: 100%;
+      background: #7d654c;
+    }
+
+    .pedido-visual::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--cafe), rgba(75, 64, 54, 0.08) 68%);
+      content: "";
+    }
+
+    .pedido-foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    .historia { background: #f5eee4; }
+
+    .historia-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5rem);
+    }
+
+    .historia-etiqueta,
+    .opiniones-etiqueta {
+      margin: 0 0 0.7rem;
+      color: #806344;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .historia-titulo {
+      max-width: 13ch;
+      margin: 0 0 1rem;
+      font: 700 clamp(2.2rem, 4vw, 3.4rem)/1.08 var(--fuente-titulo);
+      letter-spacing: -0.035em;
+    }
+
+    .historia-texto { max-width: 31rem; color: var(--cafe-medio); }
+
+    .historia-enlace {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      color: var(--cafe);
+      font-weight: 800;
+      text-underline-offset: 4px;
+    }
+
+    .historia-galeria {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      height: 430px;
+    }
+
+    .historia-foto {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #a48b6e;
+      box-shadow: 0 10px 24px rgba(47, 39, 31, 0.1);
+    }
+
+    .historia-foto:first-child { grid-row: span 2; }
+
+    .historia-foto img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 350ms ease;
+    }
+
+    .historia-foto:hover img { transform: scale(1.04); }
+
+    .historia-foto::after {
+      position: absolute;
+      inset: 50% 0 0;
+      background: linear-gradient(transparent, rgba(28, 22, 17, 0.68));
+      content: "";
+      pointer-events: none;
+    }
+
+    .historia-foto figcaption {
+      position: absolute;
+      z-index: 1;
+      right: 1rem;
+      bottom: 0.9rem;
+      left: 1rem;
+      color: white;
+      font: 700 1.05rem var(--fuente-titulo);
+    }
+
+    .opiniones { background: var(--crema); }
+
+    .opiniones-encabezado {
+      max-width: 42rem;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+
+    .opiniones-encabezado .seccion-intro { margin: 0 auto; }
+
+    .opinion-carrusel {
+      max-width: 850px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 20px;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(221, 211, 199, 0.16), transparent 24rem),
+        var(--cafe);
+      color: var(--crema);
+      box-shadow: 0 18px 44px rgba(47, 39, 31, 0.18);
+    }
+
+    .opinion-panel { min-height: 260px; padding: clamp(1.6rem, 5vw, 3.4rem); }
+    .opinion-slide[hidden] { display: none; }
+
+    .opinion-demo {
+      margin: 0 0 1.4rem;
+      color: #e5cda9;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .opinion-cita {
+      max-width: 20ch;
+      margin: 0;
+      font: 600 clamp(1.7rem, 4vw, 2.65rem)/1.2 var(--fuente-titulo);
+      letter-spacing: -0.02em;
+    }
+
+    .opinion-persona { margin: 1.4rem 0 0; color: #e6dacb; font-size: 0.92rem; }
+
+    .opinion-controles {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.1rem;
+      padding: 0 1.5rem 1.5rem;
+    }
+
+    .opinion-controles button {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(253, 245, 232, 0.45);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--crema);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 160ms ease;
+    }
+
+    .opinion-controles button:hover { background: rgba(253, 245, 232, 0.14); }
+    .opinion-controles button:focus-visible { outline: 3px solid var(--crema); outline-offset: 3px; }
+    .opinion-indice { min-width: 94px; margin: 0; color: #e6dacb; font-size: 0.88rem; text-align: center; }
+
+    .dialogo-accion {
+      display: block;
+      width: 100%;
+      min-height: 42px;
+      padding: 0.6rem 1rem;
+      border: 0;
+      border-radius: 999px;
+      background: #236f50;
+      color: white;
+      font: 800 0.9rem var(--fuente-texto);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .dialogo-accion:hover { background: #18563c; }
+
+    .dialogo-carrito,
+    .dialogo-reserva {
+      width: min(540px, calc(100% - 2rem));
+      max-height: min(82vh, 760px);
+      padding: 0;
+      border: 1px solid var(--borde);
+      border-radius: 18px;
+      background: var(--crema);
+      color: var(--cafe-texto);
+      box-shadow: 0 24px 80px rgba(28, 22, 17, 0.32);
+    }
+
+    .dialogo-reserva { width: min(600px, calc(100% - 2rem)); }
+
+    .dialogo-carrito::backdrop,
+    .dialogo-reserva::backdrop { background: rgba(31, 25, 19, 0.58); backdrop-filter: blur(4px); }
+
+    .dialogo-cabecera {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.4rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .dialogo-cabecera h2 {
+      margin: 0;
+      font: 700 1.8rem/1.1 var(--fuente-titulo);
+    }
+
+    .dialogo-cabecera p { margin: 0.35rem 0 0; color: var(--cafe-medio); font-size: 0.92rem; }
+
+    .dialogo-cerrar {
+      display: grid;
+      flex: none;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--borde);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--cafe-texto);
+      font-size: 1.35rem;
+      cursor: pointer;
+    }
+
+    .dialogo-cuerpo { max-height: 47vh; overflow-y: auto; padding: 0.5rem 1.5rem; }
+    .carrito-vacio { padding: 1.5rem 0; color: var(--cafe-medio); text-align: center; }
+    .carrito-lista { margin: 0; padding: 0; list-style: none; }
+
+    .carrito-fila {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.75rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .carrito-plato { font-family: var(--fuente-titulo); font-size: 1.08rem; font-weight: 700; }
+    .carrito-detalle { margin-top: 0.2rem; color: var(--cafe-medio); font-size: 0.84rem; line-height: 1.4; }
+    .carrito-subtotal { color: var(--cafe-medio); font-size: 0.9rem; }
+    .carrito-controles { display: flex; align-items: center; gap: 0.5rem; }
+
+    .carrito-controles button {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--borde);
+      border-radius: 50%;
+      background: var(--tarjeta);
+      color: var(--cafe-texto);
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .carrito-controles button:hover { border-color: var(--cafe); }
+    .carrito-controles output { min-width: 1.5rem; text-align: center; font-weight: 800; }
+
+    .dialogo-pie { padding: 1rem 1.5rem 1.5rem; border-top: 1px solid var(--borde); }
+    .carrito-total { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.1rem; font-weight: 800; }
+    .dialogo-accion[aria-disabled="true"] { background: #8d978f; cursor: not-allowed; pointer-events: none; }
+    .dialogo-accion:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .reserva-contenido { max-height: 68vh; overflow-y: auto; padding: 1.2rem 1.5rem 1.5rem; }
+    .reserva-formulario { display: grid; gap: 1rem; }
+    .reserva-campos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .campo-reserva { display: grid; align-content: start; gap: 0.35rem; min-width: 0; }
+    .campo-reserva label { font-size: 0.9rem; font-weight: 800; }
+
+    .campo-reserva input,
+    .campo-reserva select {
+      width: 100%;
+      min-height: 46px;
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--borde);
+      border-radius: 8px;
+      background: var(--tarjeta);
+      color: var(--cafe-texto);
+      font: inherit;
+    }
+
+    .campo-reserva input:focus-visible,
+    .campo-reserva select:focus-visible { outline: 3px solid var(--taupe); outline-offset: 2px; }
+
+    .reserva-nota {
+      margin: 0;
+      padding: 0.8rem 0.9rem;
+      border-radius: 8px;
+      background: #eee5d9;
+      color: var(--cafe-medio);
+      font-size: 0.88rem;
+    }
+
+    .reserva-enviar { margin-top: 0.15rem; }
+    .reserva-confirmacion { padding: 1.5rem 1.5rem 1.8rem; text-align: center; }
+    .reserva-confirmacion[hidden],
+    .reserva-formulario[hidden] { display: none; }
+
+    .reserva-check {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      background: #dce9df;
+      color: #236f50;
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+
+    .reserva-confirmacion h3 {
+      margin: 0;
+      font: 700 1.65rem/1.15 var(--fuente-titulo);
+    }
+
+    .reserva-confirmacion p { color: var(--cafe-medio); }
+    .reserva-resumen { font-weight: 800; color: var(--cafe-texto) !important; }
+    .reserva-otra { display: inline-flex; width: auto; margin-top: 0.5rem; }
+
+    .aviso-emergente {
+      position: fixed;
+      z-index: 40;
+      right: 1rem;
+      bottom: 5.5rem;
+      max-width: min(360px, calc(100% - 2rem));
+      padding: 0.9rem 1.1rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      background: var(--cafe-texto);
+      color: white;
+      box-shadow: 0 12px 32px rgba(28, 22, 17, 0.22);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .aviso-emergente.visible { opacity: 1; transform: translateY(0); }
+
     /* ---------- Teléfonos y tabletas ---------- */
     @media (max-width: 700px) {
-      .hero-aros { right: -30%; width: 110vw; opacity: 0.5; }
-      .destacado { padding: 1.5rem; }
+      .hero .contenedor { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-texto { max-width: 100%; }
+      .hero h1 { max-width: 11ch; }
+      .hero-visual { min-height: min(72vw, 420px); }
+      .hero-aros { right: -30%; width: 110vw; opacity: 0.12; }
+      .destacado { padding: 0; }
+      .configurador-pizza { grid-template-columns: 1fr; }
+      .configurador-visual { min-height: min(52vw, 280px); }
+      .historia-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .historia-titulo { max-width: 17ch; }
+      .historia-galeria { height: min(110vw, 450px); }
+      .opinion-panel { min-height: 240px; }
+      .visita-encabezado { grid-template-columns: 1fr; gap: 1.5rem; }
+      .visita-visual { min-height: min(58vw, 350px); }
+      .pedido { grid-template-columns: 1fr; }
+      .pedido-visual { min-height: min(54vw, 280px); }
+      .pedido-visual::after { background: linear-gradient(180deg, var(--cafe), rgba(75, 64, 54, 0.06) 75%); }
       .menu-encabezado { display: block; }
       .menu-controles { grid-template-columns: 1fr; gap: 0.7rem; }
       .categorias-nav {
@@ -682,18 +1648,40 @@
         overflow: visible;
         margin-inline: -0.25rem;
       }
+      .cabecera-fila { gap: 0.55rem 1rem; }
+      .navegacion { order: 3; width: 100%; }
+      .navegacion ul { justify-content: space-between; gap: 0.5rem; }
+      .cabecera-fila { padding-bottom: 0.45rem; }
     }
 
     @media (max-width: 480px) {
+      .franja { font-size: 0.72rem; }
       .marca { gap: 0.65rem; }
       .marca-sello { width: 56px; }
       .marca-nombre { font-size: 1.3rem; }
       .marca-lema { font-size: 0.59rem; }
-      .navegacion ul { gap: 0.25rem 1.1rem; }
-      .navegacion a { font-size: 0.95rem; }
+      .navegacion ul { gap: 0.2rem; }
+      .navegacion a { font-size: 0.86rem; }
+      .boton-carrito { min-height: 40px; padding-inline: 0.75rem; font-size: 0.84rem; }
+      .hero-visual { min-height: 75vw; }
+      .hero-sello { right: -0.4rem; width: 100px; font-size: 0.9rem; }
+      .hero-leyenda { right: 1rem; bottom: 1rem; left: 1rem; font-size: 1.1rem; }
+      .configurador-visual { min-height: 200px; }
+      .configurador-contenido { padding: 1rem; }
+      .tamano-pizza { padding: 0.45rem; }
+      .destacado-imagen { height: 210px; }
+      .destacado-contenido { padding: 1.2rem; }
+      .historia-galeria { height: min(112vw, 390px); gap: 0.5rem; }
+      .historia-foto figcaption { right: 0.7rem; bottom: 0.7rem; left: 0.7rem; font-size: 0.9rem; }
+      .opinion-panel { min-height: 220px; }
+      .visita-visual { min-height: 220px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .pedido-visual { min-height: 190px; }
+      .reserva-campos { grid-template-columns: 1fr; gap: 0.8rem; }
       .tarjeta-contenido { padding: 1rem; }
       .tarjeta-cabecera { align-items: flex-start; flex-wrap: wrap; gap: 0.25rem 0.6rem; }
       .tarjeta-nombre, .precio { font-size: 1.15rem; }
+      .aviso-emergente { right: 0.75rem; bottom: 5rem; left: 0.75rem; max-width: none; }
     }
 
     /* Respeta a quienes prefieren menos movimiento */
@@ -701,6 +1689,8 @@
       html { scroll-behavior: auto; }
       .aro { animation: none; }
       .tarjeta, .categoria-filtro, .foto-plato { transition: none; }
+      .destacado-foto, .historia-foto img { transition: none; }
+      .aviso-emergente, .opinion-controles button { transition: none; }
     }
   </style>
 </head>
@@ -731,6 +1721,11 @@
     </symbol>
   </svg>
 
+  <div class="franja">
+    <span>Una mesa para compartir, sabores con acento italiano.</span>
+    <a href="#menu">Descubre el menú <span aria-hidden="true">→</span></a>
+  </div>
+
   <!-- ===================== ENCABEZADO ===================== -->
   <header class="cabecera">
     <div class="contenedor cabecera-fila">
@@ -747,9 +1742,16 @@
         <ul>
           <li><a href="#menu">Menú</a></li>
           <li><a href="#especialidades">Especialidades</a></li>
+          <li><a href="#historia">Historia</a></li>
+          <li><a href="#opiniones">Opiniones</a></li>
           <li><a href="#visitanos">Visítanos</a></li>
         </ul>
       </nav>
+
+      <button class="boton-carrito" id="abrir-carrito" type="button" aria-haspopup="dialog" aria-controls="dialogo-carrito">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.5a2 2 0 0 0 1.9-1.4L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+        Mi pedido <span class="carrito-cantidad" id="cantidad-carrito" aria-live="polite">0</span>
+      </button>
 
     </div>
   </header>
@@ -769,6 +1771,7 @@
 
       <div class="contenedor">
         <div class="hero-texto">
+          <p class="hero-etiqueta">Cocina italiana moderna · Manta</p>
           <!-- Frase publicitaria (puedes cambiarla por otra) -->
           <h1>Cocina italiana, hecha con calma.</h1>
 
@@ -784,9 +1787,15 @@
             <a class="enlace-suave" href="#especialidades">Conoce las especialidades</a>
           </div>
         </div>
+        <div class="hero-visual">
+          <img class="hero-foto" src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&amp;fit=crop&amp;w=1200&amp;q=88" alt="Pasta italiana servida con salsa y hierbas frescas" fetchpriority="high" decoding="async">
+          <span class="hero-leyenda">Una pausa deliciosa, a tu manera.</span>
+          <span class="hero-sello">Hecho para<br>compartir</span>
+        </div>
       </div>
     </section>
 
+    <div class="frase-marca">Buena comida, buena compañía y <span>tiempo para disfrutar.</span></div>
 
     <!-- ===================== MENÚ ===================== -->
     <section class="seccion" id="menu">
@@ -907,6 +1916,54 @@
         <!-- ============ CATEGORÍA: PIZZAS ARTESANALES ============ -->
         <div class="categoria" id="pizzas">
           <h3 class="categoria-titulo">Pizzas artesanales</h3>
+          <div class="configurador-pizza" id="configurador-pizza">
+            <div class="configurador-visual">
+              <img class="configurador-foto" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&amp;fit=crop&amp;w=1000&amp;q=86" alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <span class="configurador-leyenda">Tu pizza,<br>a tu manera.</span>
+            </div>
+            <div class="configurador-contenido">
+              <p class="configurador-etiqueta">Precios de demostración</p>
+              <h4 class="configurador-titulo">Crea tu pizza</h4>
+              <p class="configurador-descripcion">Elige el tamaño y agrega tus ingredientes favoritos. Incluye masa, salsa de tomate y mozzarella.</p>
+
+              <fieldset class="opciones-pizza">
+                <legend>Tamaño</legend>
+                <div class="tamanos-pizza">
+                  <label class="opcion-tamano">
+                    <input type="radio" name="tamano-pizza" value="Pequeña" data-adicional="0" data-id="pequena">
+                    <span class="tamano-pizza"><strong>Pequeña</strong><small>Base $9.50</small></span>
+                  </label>
+                  <label class="opcion-tamano">
+                    <input type="radio" name="tamano-pizza" value="Mediana" data-adicional="3" data-id="mediana" checked>
+                    <span class="tamano-pizza"><strong>Mediana</strong><small>Base $12.50</small></span>
+                  </label>
+                  <label class="opcion-tamano">
+                    <input type="radio" name="tamano-pizza" value="Familiar" data-adicional="5" data-id="familiar">
+                    <span class="tamano-pizza"><strong>Familiar</strong><small>Base $14.50</small></span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset class="opciones-pizza">
+                <legend>Ingredientes extra</legend>
+                <div class="extras-pizza">
+                  <label class="extra-pizza"><input type="checkbox" value="Pepperoni" data-id="pepperoni" data-precio="1.75"><span>Pepperoni</span><small>+$1.75</small></label>
+                  <label class="extra-pizza"><input type="checkbox" value="Champiñones" data-id="champinones" data-precio="1.25"><span>Champiñones</span><small>+$1.25</small></label>
+                  <label class="extra-pizza"><input type="checkbox" value="Jamón" data-id="jamon" data-precio="1.50"><span>Jamón</span><small>+$1.50</small></label>
+                  <label class="extra-pizza"><input type="checkbox" value="Aceitunas" data-id="aceitunas" data-precio="0.75"><span>Aceitunas</span><small>+$0.75</small></label>
+                </div>
+              </fieldset>
+
+              <div class="configurador-resumen">
+                <span>Precio de muestra</span>
+                <output class="configurador-total" id="precio-pizza" aria-live="polite">$12.50</output>
+              </div>
+              <button class="configurador-agregar" id="agregar-pizza-personalizada" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                Añadir al pedido
+              </button>
+            </div>
+          </div>
           <div class="tarjetas">
 
             <article class="tarjeta">
@@ -994,22 +2051,33 @@
         <div class="destacados">
 
           <article class="destacado">
-            <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-pasta"/></svg></div>
-            <h3 class="destacado-nombre">Lasagna Capri</h3>
-            <p>Capas de pasta, salsa de carne y bechamel, gratinadas con mozzarella. Una porción generosa para compartir.</p>
-            <p class="destacado-ingredientes"><strong>Ingredientes:</strong> pasta de lasaña, carne molida, salsa de tomate, bechamel, mozzarella.</p>
-            <p class="destacado-porque">Por qué la destacamos: es un plato reconfortante, fácil de compartir y querido por todas las edades.</p>
-            <!-- CAMBIAR PRECIO: si cambias el precio en el menú, cámbialo también aquí -->
-            <p class="destacado-precio">$12.50</p>
+            <div class="destacado-imagen">
+              <img class="destacado-foto" src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&amp;fit=crop&amp;w=1000&amp;q=86" alt="Lasagna gratinada con capas de pasta y salsa" loading="lazy" decoding="async">
+              <span class="destacado-sello">Especialidad de la casa</span>
+            </div>
+            <div class="destacado-contenido">
+              <div class="destacado-meta"><span>Pasta al horno</span><p class="destacado-precio">$12.50</p></div>
+              <h3 class="destacado-nombre">Lasagna Capri</h3>
+              <p>Capas de pasta, salsa de carne y bechamel, gratinadas con mozzarella. Una porción generosa para compartir.</p>
+              <p class="destacado-ingredientes"><strong>Ingredientes:</strong> pasta de lasaña, carne molida, salsa de tomate, bechamel, mozzarella.</p>
+              <p class="destacado-porque">Un plato reconfortante, generoso y hecho para compartir.</p>
+              <a class="pedido-plato" href="#menu" aria-label="Añadir Lasagna Capri al pedido"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Añadir al pedido</a>
+            </div>
           </article>
 
           <article class="destacado">
-            <div class="tarjeta-icono"><svg class="icono" aria-hidden="true"><use href="#i-postre"/></svg></div>
-            <h3 class="destacado-nombre">Panna Cotta de Maracuyá</h3>
-            <p>Crema suave de textura delicada, coronada con salsa de maracuyá. Un toque local en un clásico italiano.</p>
-            <p class="destacado-ingredientes"><strong>Ingredientes:</strong> crema de leche, azúcar, gelatina, maracuyá.</p>
-            <p class="destacado-porque">Por qué la destacamos: une una receta clásica con una fruta cercana, justo lo que entendemos por cocina italiana moderna.</p>
-            <p class="destacado-precio">$5.00</p>
+            <div class="destacado-imagen">
+              <img class="destacado-foto" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&amp;fit=crop&amp;w=1000&amp;q=86" alt="Postre cremoso acompañado de fruta fresca" loading="lazy" decoding="async">
+              <span class="destacado-sello">Especialidad de la casa</span>
+            </div>
+            <div class="destacado-contenido">
+              <div class="destacado-meta"><span>Un toque local</span><p class="destacado-precio">$5.00</p></div>
+              <h3 class="destacado-nombre">Panna Cotta de Maracuyá</h3>
+              <p>Crema suave de textura delicada, coronada con salsa de maracuyá. Un toque local en un clásico italiano.</p>
+              <p class="destacado-ingredientes"><strong>Ingredientes:</strong> crema de leche, azúcar, gelatina, maracuyá.</p>
+              <p class="destacado-porque">El final fresco y frutal para cerrar la mesa.</p>
+              <a class="pedido-plato" href="#menu" aria-label="Añadir Panna Cotta de Maracuyá al pedido"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Añadir al pedido</a>
+            </div>
           </article>
 
         </div>
@@ -1017,37 +2085,132 @@
     </section>
 
 
+    <!-- ===================== HISTORIA Y GALERÍA ===================== -->
+    <section class="seccion historia" id="historia">
+      <div class="contenedor historia-grid">
+        <div class="historia-contenido">
+          <p class="historia-etiqueta">La idea detrás de Casa Capri</p>
+          <h2 class="historia-titulo">Italia en el espíritu, Manta en la mesa</h2>
+          <p class="historia-texto">
+            Casa Capri es una propuesta de restaurante creada para este proyecto: una mesa acogedora donde las recetas italianas se encuentran con sabores y momentos de la costa ecuatoriana.
+          </p>
+          <p class="historia-texto">
+            Imaginamos cada visita para compartir sin prisa, descubrir un nuevo plato y terminar con algo dulce. Esta galería forma parte de la experiencia de muestra.
+          </p>
+          <a class="historia-enlace" href="#especialidades">Conoce nuestras especialidades <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="historia-galeria" aria-label="Galería visual de la propuesta Casa Capri">
+          <figure class="historia-foto">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&amp;fit=crop&amp;w=1000&amp;q=86" alt="Pizza artesanal recién horneada para compartir" loading="lazy" decoding="async">
+            <figcaption>Sabores para compartir</figcaption>
+          </figure>
+          <figure class="historia-foto">
+            <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&amp;fit=crop&amp;w=700&amp;q=82" alt="Pasta italiana con hierbas frescas" loading="lazy" decoding="async">
+            <figcaption>Recetas con inspiración italiana</figcaption>
+          </figure>
+          <figure class="historia-foto">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&amp;fit=crop&amp;w=700&amp;q=82" alt="Postre cremoso con fruta fresca" loading="lazy" decoding="async">
+            <figcaption>Un final dulce</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== OPINIONES FICTICIAS ===================== -->
+    <section class="seccion opiniones" id="opiniones">
+      <div class="contenedor">
+        <div class="opiniones-encabezado">
+          <p class="opiniones-etiqueta">Palabras de nuestra mesa</p>
+          <h2 class="seccion-titulo">Opiniones para imaginar</h2>
+          <p class="seccion-intro">Estas reseñas son ficticias y se incluyen únicamente como contenido de demostración.</p>
+        </div>
+        <div class="opinion-carrusel" role="region" aria-roledescription="carrusel" aria-label="Reseñas ficticias de Casa Capri">
+          <div class="opinion-panel">
+            <article class="opinion-slide">
+              <p class="opinion-demo">Reseña ficticia · Ejemplo 1</p>
+              <blockquote class="opinion-cita">“Una pizza recién hecha, una charla larga y ganas de volver por el postre.”</blockquote>
+              <p class="opinion-persona">Persona invitada · Opinión de muestra</p>
+            </article>
+            <article class="opinion-slide" hidden>
+              <p class="opinion-demo">Reseña ficticia · Ejemplo 2</p>
+              <blockquote class="opinion-cita">“Mi plan perfecto: compartir una pasta y terminar con algo dulce.”</blockquote>
+              <p class="opinion-persona">Persona invitada · Opinión de muestra</p>
+            </article>
+            <article class="opinion-slide" hidden>
+              <p class="opinion-demo">Reseña ficticia · Ejemplo 3</p>
+              <blockquote class="opinion-cita">“Una mesa acogedora para celebrar los momentos sencillos.”</blockquote>
+              <p class="opinion-persona">Persona invitada · Opinión de muestra</p>
+            </article>
+          </div>
+          <div class="opinion-controles">
+            <button type="button" id="opinion-anterior" aria-label="Mostrar reseña anterior"><span aria-hidden="true">←</span></button>
+            <p class="opinion-indice" id="estado-opiniones" aria-live="polite" aria-atomic="true">Reseña 1 de 3</p>
+            <button type="button" id="opinion-siguiente" aria-label="Mostrar reseña siguiente"><span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===================== INFORMACIÓN DEL RESTAURANTE ===================== -->
     <section class="seccion informacion" id="visitanos">
       <div class="contenedor">
 
-        <h2 class="seccion-titulo">Visítanos</h2>
-        <p class="seccion-intro" style="color: var(--cafe-texto);">
-          Casa Capri es cocina italiana moderna para toda la familia, con una propuesta artesanal y sencilla.
-        </p>
+        <div class="visita-encabezado">
+          <div>
+            <p class="visita-etiqueta">Un rincón italiano en la ciudad</p>
+            <h2 class="seccion-titulo">Visítanos</h2>
+            <p class="seccion-intro">
+              Casa Capri es cocina italiana moderna para toda la familia, con una propuesta artesanal y sencilla.
+            </p>
+          </div>
+          <div class="visita-visual">
+            <img class="visita-foto" src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&amp;fit=crop&amp;w=1100&amp;q=86" alt="Pasta italiana con hierbas frescas servida para compartir" loading="lazy" decoding="async">
+            <span class="visita-pie-foto">Te esperamos en Manta, Ecuador.</span>
+          </div>
+        </div>
 
         <!-- CAMBIAR DATOS: estos son datos de ejemplo. Reemplázalos por los de tu proyecto. -->
         <div class="info-grid">
           <div>
-            <h3>Ubicación</h3>
-            <p>Manta, Ecuador</p>
+            <span class="info-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <div class="info-contenido">
+              <h3>Ubicación</h3>
+              <p>Manta, Ecuador</p>
+            </div>
           </div>
           <div>
-            <h3>Horario</h3>
-            <p>Martes a domingo, de 12:00 a 21:00 (horario referencial)</p>
+            <span class="info-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <div class="info-contenido">
+              <h3>Horario</h3>
+              <p>Martes a domingo, de 12:00 a 21:00 (horario referencial)</p>
+            </div>
           </div>
           <div>
-            <h3>Pedidos y reservas</h3>
-            <p>Escríbenos por WhatsApp y te ayudamos a elegir.</p>
+            <span class="info-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3-.4.6-.4.9-.1l1 1.4c.2.3.1.5-.2.8l-.5.5c.6 1.2 1.4 2 2.6 2.6l.5-.5c.3-.3.5-.4.8-.2l1.4 1c.3.2.3.6.1.9"/></svg></span>
+            <div class="info-contenido">
+              <h3>Pedidos y reservas</h3>
+              <p>Elige una fecha y un horario para tu visita.</p>
+              <button class="info-enlace" id="abrir-reserva" type="button" aria-haspopup="dialog" aria-controls="dialogo-reserva">Simular una reserva <span aria-hidden="true">→</span></button>
+            </div>
           </div>
         </div>
 
         <!-- Llamada a la acción -->
         <div class="pedido">
-          <p class="pedido-frase">Haz tu pedido hoy y comparte la mesa con Casa Capri.</p>
+          <div class="pedido-contenido">
+            <p class="pedido-etiqueta">La mesa te espera</p>
+            <p class="pedido-frase">Algo rico siempre se puede compartir.</p>
+            <p class="pedido-descripcion">Elige tus favoritos y envíanos tu pedido. Te ayudamos a confirmar los detalles por WhatsApp.</p>
+            <div class="pedido-acciones">
           <!-- CAMBIAR DATOS: configura numeroWhatsApp al final del archivo.
             Formato: código de país 593 + número sin el 0 inicial (ej.: 593991234567) -->
-          <a class="boton" id="pedido-whatsapp" href="https://wa.me/593900000000" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+              <a class="boton" id="pedido-whatsapp" href="https://wa.me/593900000000" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+              <a class="pedido-menu" href="#menu">Explorar el menú <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <div class="pedido-visual" aria-hidden="true">
+            <img class="pedido-foto" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&amp;fit=crop&amp;w=1100&amp;q=86" alt="" loading="lazy" decoding="async">
+          </div>
         </div>
 
       </div>
@@ -1067,6 +2230,79 @@
     </div>
   </footer>
 
+  <dialog class="dialogo-carrito" id="dialogo-carrito" aria-labelledby="titulo-carrito">
+    <div class="dialogo-cabecera">
+      <div>
+        <h2 id="titulo-carrito">Tu pedido</h2>
+        <p>Revisa tus platos antes de escribirnos.</p>
+      </div>
+      <button class="dialogo-cerrar" id="cerrar-carrito" type="button" aria-label="Cerrar pedido">&times;</button>
+    </div>
+    <div class="dialogo-cuerpo">
+      <p class="carrito-vacio" id="carrito-vacio">Todavía no agregas platos. Explora el menú y arma tu pedido.</p>
+      <ul class="carrito-lista" id="lista-carrito" aria-label="Platos de tu pedido"></ul>
+    </div>
+    <div class="dialogo-pie">
+      <div class="carrito-total"><span>Total referencial</span><output id="total-carrito">$0.00</output></div>
+      <a class="dialogo-accion" id="enviar-pedido" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1">Continuar por WhatsApp</a>
+      <p class="carrito-subtotal">El restaurante confirmará disponibilidad y total por WhatsApp. No se realiza ningún cobro aquí.</p>
+    </div>
+  </dialog>
+
+  <dialog class="dialogo-reserva" id="dialogo-reserva" aria-labelledby="titulo-reserva">
+    <div class="dialogo-cabecera">
+      <div>
+        <h2 id="titulo-reserva">Reserva tu mesa</h2>
+        <p>Completa los datos para ver la confirmación.</p>
+      </div>
+      <button class="dialogo-cerrar" id="cerrar-reserva" type="button" aria-label="Cerrar reserva">&times;</button>
+    </div>
+    <div class="reserva-contenido">
+      <form class="reserva-formulario" id="formulario-reserva">
+        <div class="campo-reserva">
+          <label for="nombre-reserva">Tu nombre</label>
+          <input id="nombre-reserva" name="nombre" type="text" autocomplete="name" maxlength="80" required autofocus>
+        </div>
+        <div class="reserva-campos">
+          <div class="campo-reserva">
+            <label for="fecha-reserva">Fecha</label>
+            <input id="fecha-reserva" name="fecha" type="date" required>
+          </div>
+          <div class="campo-reserva">
+            <label for="hora-reserva">Hora</label>
+            <select id="hora-reserva" name="hora" required>
+              <option value="">Selecciona un horario</option>
+              <option value="12:00">12:00</option>
+              <option value="13:00">13:00</option>
+              <option value="14:00">14:00</option>
+              <option value="15:00">15:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+              <option value="18:00">18:00</option>
+              <option value="19:00">19:00</option>
+              <option value="20:00">20:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="campo-reserva">
+          <label for="personas-reserva">Número de personas</label>
+          <input id="personas-reserva" name="personas" type="number" min="1" value="2" required>
+        </div>
+        <p class="reserva-nota">Demo de proyecto: no se enviará ni guardará ninguna reserva.</p>
+        <button class="dialogo-accion reserva-enviar" type="submit">Ver confirmación</button>
+      </form>
+      <div class="reserva-confirmacion" id="confirmacion-reserva" role="status" aria-live="polite" hidden>
+        <span class="reserva-check" aria-hidden="true">✓</span>
+        <h3 id="titulo-confirmacion" tabindex="-1">¡Reserva de muestra lista!</h3>
+        <p class="reserva-resumen" id="resumen-confirmacion"></p>
+        <p>Esto es solo una demostración visual. No se envió ninguna solicitud ni se guardaron tus datos.</p>
+        <button class="dialogo-accion reserva-otra" id="otra-reserva" type="button">Probar otra reserva</button>
+      </div>
+    </div>
+  </dialog>
+
+  <p class="aviso-emergente" id="aviso-emergente" role="status" aria-live="polite"></p>
+
   <script>
     const numeroWhatsApp = "593900000000";
     const buscadorMenu = document.querySelector("#buscar-plato");
@@ -1075,22 +2311,151 @@
     const estadoMenu = document.querySelector("#estado-menu");
     const mensajeSinResultados = document.querySelector("#sin-resultados");
     const notaMenu = document.querySelector("#nota-menu");
+    const configuradorPizza = document.querySelector("#configurador-pizza");
+    const precioPizzaOutput = document.querySelector("#precio-pizza");
+    const tamanoPizzaInputs = [...document.querySelectorAll('input[name="tamano-pizza"]')];
+    const extraPizzaInputs = [...document.querySelectorAll(".extra-pizza input")];
+    const dialogoCarrito = document.querySelector("#dialogo-carrito");
+    const dialogoReserva = document.querySelector("#dialogo-reserva");
+    const formularioReserva = document.querySelector("#formulario-reserva");
+    const confirmacionReserva = document.querySelector("#confirmacion-reserva");
+    const fechaReservaInput = document.querySelector("#fecha-reserva");
+    const nombreReservaInput = document.querySelector("#nombre-reserva");
+    const listaCarrito = document.querySelector("#lista-carrito");
+    const avisoEmergente = document.querySelector("#aviso-emergente");
+    const diapositivasOpinion = [...document.querySelectorAll(".opinion-slide")];
+    const estadoOpiniones = document.querySelector("#estado-opiniones");
+    const carrito = new Map();
     let categoriaActiva = "todas";
+    let temporizadorAviso;
+    let indiceOpinionActual = 0;
+
+    function mostrarOpinion(indice) {
+      indiceOpinionActual = (indice + diapositivasOpinion.length) % diapositivasOpinion.length;
+      diapositivasOpinion.forEach((diapositiva, posicion) => {
+        diapositiva.hidden = posicion !== indiceOpinionActual;
+      });
+      estadoOpiniones.textContent = `Reseña ${indiceOpinionActual + 1} de ${diapositivasOpinion.length}`;
+    }
+
+    document.querySelector("#opinion-anterior").addEventListener("click", () => mostrarOpinion(indiceOpinionActual - 1));
+    document.querySelector("#opinion-siguiente").addEventListener("click", () => mostrarOpinion(indiceOpinionActual + 1));
+
+    function normalizarTexto(texto) {
+      return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
+    }
+
+    function mostrarAviso(mensaje) {
+      avisoEmergente.textContent = mensaje;
+      avisoEmergente.classList.add("visible");
+      window.clearTimeout(temporizadorAviso);
+      temporizadorAviso = window.setTimeout(() => avisoEmergente.classList.remove("visible"), 2600);
+    }
 
     document.querySelectorAll(".pedido-plato").forEach((enlace) => {
-      const tarjeta = enlace.closest(".tarjeta");
-      const nombre = tarjeta.querySelector(".tarjeta-nombre").textContent.trim();
-      const precio = tarjeta.querySelector(".precio").textContent.trim();
-      const mensaje = `Hola, quiero pedir ${nombre} (${precio}).`;
-      enlace.href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+      const boton = document.createElement("button");
+      const tarjeta = enlace.closest(".tarjeta, .destacado");
+      const nombre = tarjeta.querySelector(".tarjeta-nombre, .destacado-nombre").textContent.trim();
+      boton.type = "button";
+      boton.className = enlace.className;
+      boton.setAttribute("aria-label", `Añadir ${nombre} al pedido`);
+      boton.append(enlace.querySelector("svg").cloneNode(true), document.createTextNode("Añadir al pedido"));
+      enlace.replaceWith(boton);
+      boton.addEventListener("click", () => {
+        const precioTexto = tarjeta.querySelector(".precio, .destacado-precio").textContent.trim();
+        const precio = Number(precioTexto.replace(/[^\d.]/g, ""));
+        const actual = carrito.get(nombre);
+        carrito.set(nombre, { key: nombre, nombre, precio, cantidad: actual ? actual.cantidad + 1 : 1 });
+        actualizarCarrito();
+        mostrarAviso(`${nombre} añadido a tu pedido`);
+      });
+    });
+
+    function actualizarPrecioPizza() {
+      const tamano = tamanoPizzaInputs.find((opcion) => opcion.checked);
+      const precio = 9.5 + Number(tamano.dataset.adicional) +
+        extraPizzaInputs
+          .filter((extra) => extra.checked)
+          .reduce((total, extra) => total + Number(extra.dataset.precio), 0);
+      precioPizzaOutput.textContent = `$${precio.toFixed(2)}`;
+    }
+
+    configuradorPizza.addEventListener("change", actualizarPrecioPizza);
+    document.querySelector("#agregar-pizza-personalizada").addEventListener("click", () => {
+      const tamano = tamanoPizzaInputs.find((opcion) => opcion.checked);
+      const extras = extraPizzaInputs.filter((extra) => extra.checked);
+      const extraIds = extras.map((extra) => extra.dataset.id).sort();
+      const key = `pizza-${tamano.dataset.id}-${extraIds.join("-")}`;
+      const nombre = `Pizza personalizada · ${tamano.value}`;
+      const detalle = extras.length
+        ? `Masa, salsa de tomate, mozzarella y extras: ${extras.map((extra) => extra.value).join(", ")}`
+        : "Masa, salsa de tomate y mozzarella";
+      const precio = Number(precioPizzaOutput.textContent.replace(/[^\d.]/g, ""));
+      const actual = carrito.get(key);
+      carrito.set(key, { key, nombre, precio, detalle, cantidad: actual ? actual.cantidad + 1 : 1 });
+      actualizarCarrito();
+      mostrarAviso("Tu pizza personalizada se añadió al pedido");
     });
 
     const mensajePedidoGeneral = "Hola, quiero hacer un pedido en Casa Capri.";
     document.querySelector("#pedido-whatsapp").href =
       `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajePedidoGeneral)}`;
 
+    const hoy = new Date();
+    fechaReservaInput.min = [
+      hoy.getFullYear(),
+      String(hoy.getMonth() + 1).padStart(2, "0"),
+      String(hoy.getDate()).padStart(2, "0")
+    ].join("-");
+
+    document.querySelector("#abrir-reserva").addEventListener("click", () => dialogoReserva.showModal());
+    document.querySelector("#cerrar-reserva").addEventListener("click", () => dialogoReserva.close());
+    dialogoReserva.addEventListener("click", (evento) => {
+      if (evento.target === dialogoReserva) dialogoReserva.close();
+    });
+    dialogoReserva.addEventListener("close", () => {
+      formularioReserva.reset();
+      nombreReservaInput.setCustomValidity("");
+      formularioReserva.hidden = false;
+      confirmacionReserva.hidden = true;
+    });
+
+    nombreReservaInput.addEventListener("input", () => nombreReservaInput.setCustomValidity(""));
+
+    formularioReserva.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      if (!formularioReserva.reportValidity()) return;
+
+      const datosReserva = new FormData(formularioReserva);
+      const nombre = String(datosReserva.get("nombre")).trim();
+      if (!nombre) {
+        nombreReservaInput.setCustomValidity("Escribe tu nombre para continuar.");
+        nombreReservaInput.reportValidity();
+        return;
+      }
+
+      nombreReservaInput.setCustomValidity("");
+      const fecha = new Date(`${datosReserva.get("fecha")}T00:00:00`);
+      const fechaTexto = new Intl.DateTimeFormat("es-EC", { dateStyle: "full" }).format(fecha);
+      const hora = datosReserva.get("hora");
+      const personas = Number(datosReserva.get("personas"));
+      document.querySelector("#resumen-confirmacion").textContent =
+        `${nombre}, tu reserva de muestra es para el ${fechaTexto} a las ${hora}, para ${personas} ${personas === 1 ? "persona" : "personas"}.`;
+      formularioReserva.hidden = true;
+      confirmacionReserva.hidden = false;
+      document.querySelector("#titulo-confirmacion").focus();
+    });
+
+    document.querySelector("#otra-reserva").addEventListener("click", () => {
+      formularioReserva.reset();
+      nombreReservaInput.setCustomValidity("");
+      confirmacionReserva.hidden = true;
+      formularioReserva.hidden = false;
+      nombreReservaInput.focus();
+    });
+
     function actualizarMenu() {
-      const termino = buscadorMenu.value.trim().toLocaleLowerCase("es");
+      const termino = normalizarTexto(buscadorMenu.value.trim());
       let platosVisibles = 0;
 
       categoriasMenu.forEach((categoria) => {
@@ -1099,10 +2464,11 @@
         let platosCategoria = 0;
 
         tarjetas.forEach((tarjeta) => {
-          const textoPlato = [...tarjeta.querySelectorAll(".tarjeta-nombre, .tarjeta-desc, .tarjeta-ingredientes, .insignia")]
-            .map((elemento) => elemento.textContent)
-            .join(" ")
-            .toLocaleLowerCase("es");
+          const textoPlato = normalizarTexto(
+            [...tarjeta.querySelectorAll(".tarjeta-nombre, .tarjeta-desc, .tarjeta-ingredientes, .insignia")]
+              .map((elemento) => elemento.textContent)
+              .join(" ")
+          );
           const coincideTexto = !termino || textoPlato.includes(termino);
           tarjeta.hidden = !coincideCategoria || !coincideTexto;
           if (!tarjeta.hidden) platosCategoria += 1;
@@ -1117,7 +2483,99 @@
         : `${platosVisibles} platos en el menú`;
       mensajeSinResultados.hidden = platosVisibles !== 0;
       notaMenu.hidden = platosVisibles === 0;
+      configuradorPizza.hidden = Boolean(termino) ||
+        (categoriaActiva !== "todas" && categoriaActiva !== "pizzas");
     }
+
+    function actualizarCarrito() {
+      const productos = [...carrito.values()];
+      const cantidadTotal = productos.reduce((total, producto) => total + producto.cantidad, 0);
+      const subtotal = productos.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
+      const formatoPrecio = (valor) => `$${valor.toFixed(2)}`;
+
+      document.querySelector("#cantidad-carrito").textContent = String(cantidadTotal);
+      document.querySelector("#total-carrito").textContent = formatoPrecio(subtotal);
+      document.querySelector("#carrito-vacio").hidden = cantidadTotal > 0;
+      listaCarrito.replaceChildren();
+
+      productos.forEach((producto) => {
+        const fila = document.createElement("li");
+        fila.className = "carrito-fila";
+
+        const detalle = document.createElement("div");
+        const nombre = document.createElement("div");
+        nombre.className = "carrito-plato";
+        nombre.textContent = producto.nombre;
+        if (producto.detalle) {
+          const detalleProducto = document.createElement("div");
+          detalleProducto.className = "carrito-detalle";
+          detalleProducto.textContent = producto.detalle;
+          detalle.append(nombre, detalleProducto);
+        } else {
+          detalle.append(nombre);
+        }
+        const total = document.createElement("div");
+        total.className = "carrito-subtotal";
+        total.textContent = `${formatoPrecio(producto.precio)} c/u · ${formatoPrecio(producto.precio * producto.cantidad)}`;
+        detalle.append(total);
+
+        const controles = document.createElement("div");
+        controles.className = "carrito-controles";
+        const menos = document.createElement("button");
+        menos.type = "button";
+        menos.dataset.accion = "restar";
+        menos.dataset.key = producto.key;
+        menos.setAttribute("aria-label", `Quitar una unidad de ${producto.nombre}`);
+        menos.textContent = "−";
+        const cantidad = document.createElement("output");
+        cantidad.textContent = String(producto.cantidad);
+        const mas = document.createElement("button");
+        mas.type = "button";
+        mas.dataset.accion = "sumar";
+        mas.dataset.key = producto.key;
+        mas.setAttribute("aria-label", `Añadir una unidad de ${producto.nombre}`);
+        mas.textContent = "+";
+        controles.append(menos, cantidad, mas);
+        fila.append(detalle, controles);
+        listaCarrito.append(fila);
+      });
+
+      const enlacePedido = document.querySelector("#enviar-pedido");
+      if (cantidadTotal === 0) {
+        enlacePedido.removeAttribute("href");
+        enlacePedido.setAttribute("aria-disabled", "true");
+        enlacePedido.setAttribute("tabindex", "-1");
+      } else {
+        const lineas = productos.map((producto) =>
+          `- ${producto.cantidad} x ${producto.nombre}${producto.detalle ? `\n  ${producto.detalle}` : ""} (${formatoPrecio(producto.precio * producto.cantidad)})`
+        );
+        const mensaje = [
+          "Hola, quiero hacer este pedido en Casa Capri:",
+          ...lineas,
+          `Total referencial: ${formatoPrecio(subtotal)}`,
+          "¿Me confirman disponibilidad, por favor?"
+        ].join("\n");
+        enlacePedido.href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+        enlacePedido.setAttribute("aria-disabled", "false");
+        enlacePedido.removeAttribute("tabindex");
+      }
+    }
+
+    listaCarrito.addEventListener("click", (evento) => {
+      const boton = evento.target.closest("button[data-accion]");
+      if (!boton) return;
+      const producto = carrito.get(boton.dataset.key);
+      if (!producto) return;
+      producto.cantidad += boton.dataset.accion === "sumar" ? 1 : -1;
+      if (producto.cantidad <= 0) carrito.delete(producto.key);
+      actualizarCarrito();
+    });
+
+    document.querySelector("#abrir-carrito").addEventListener("click", () => dialogoCarrito.showModal());
+    document.querySelector("#cerrar-carrito").addEventListener("click", () => dialogoCarrito.close());
+    dialogoCarrito.addEventListener("click", (evento) => {
+      if (evento.target === dialogoCarrito) dialogoCarrito.close();
+    });
 
     filtrosCategoria.forEach((filtro) => {
       filtro.addEventListener("click", () => {
@@ -1130,6 +2588,8 @@
     });
 
     buscadorMenu.addEventListener("input", actualizarMenu);
+    actualizarPrecioPizza();
+    actualizarCarrito();
     actualizarMenu();
   </script>
 </body>
